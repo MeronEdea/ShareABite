@@ -5,26 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ShareABite </title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <nav class="nav">
-        <div class="logo">
-            ShareABite
-        </div>
-        <div class="nav-links">
-            <a href="#">How It Works</a>
-            <a href="#">Features</a>
-            <a href="#">About</a>
-            <a href="#" class="btn-primary">Donate</a>
+        <div class="logo">ShareABite</div>
+        <button class="mobile-menu-btn" onclick="toggleMenu()">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <div class="nav-links" id="navLinks">
+            <a href="#how">How It Works</a>
+            <a href="#features">Features</a>
+            <a href="#about">About</a>
+            <a href="#" class=" btn btn-primary">Donate</a>
         </div>
     </nav>
     <div class="main">
         <div class="main-content">
             <h1>Share Good Food, Build Community</h1>
             <p>Connect with neighbors to share leftover meals. Too good to waste, too good not to share.</p>
-            <a href="#" class="btn-primary">Start Your Application</a>
+            <a href="#" class="btn btn-primary">Start Your Application</a>
         </div>
-        <div class="stats">
+        <!-- <div class="stats">
             <div class="stats-box">
                 <span class="stats-num"> 12,847</span>
                 <span class="stats-text"> Meals Shared</span>
@@ -37,7 +39,7 @@
                 <span class="stats-num"> 8.2 tons</span>
                 <span class="stats-text"> Food Saved</span>
             </div>
-        </div>
+        </div> -->
     </div>
     <div class="how-it-works">
         <h2 class="title">How It Works</h2>
@@ -68,32 +70,32 @@
         </div>
     </div>
     <div class="features">
-        <h2 class="title">Why ShareABite?</h2>
-        <p class="subtitle">Making food sharing safe, easy, and rewarding</p>
+        <h2 class="features-title">Why ShareABite?</h2>
+        <p class="features-subtitle">Making food sharing safe, easy, and rewarding</p>
         <div class="features-grid">
             <div class="feature">
-                <div class="step-icon">
+                <div class="feature-icon">
                     <i class="fa-solid fa-location-dot"></i>
                 </div>
                 <h3>Location-Based</h3>
                 <p>Find food shares within walking distance. See exactly how far away each meal is.</p>
             </div>
             <div class="feature">
-                <div class="step-icon">
+                <div class="feature-icon">
                     <i class="fa-regular fa-comment-dots"></i>
                 </div>
                 <h3>Built-in Chat</h3>
                 <p>Coordinate pickup details easily with our secure messaging system.</p>
             </div>
             <div class="feature">
-                <div class="step-icon">
+                <div class="feature-icon">
                     <i class="fa-solid fa-star"></i>
                 </div>
                 <h3>Community Ratings</h3>
                 <p>Build trust through reviews and ratings. Know you're sharing with reliable neighbors.</p>
             </div>
             <div class="feature">
-                <div class="step-icon">
+                <div class="feature-icon">
                     <i class="fa-brands fa-pagelines"></i>
                 </div>
                 <h3>Impact Tracking</h3>
@@ -110,13 +112,15 @@
                     <label for="fullname">Full Name</label>
                     <input type="text" id="fullname" placeholder="Enter your full name" required>
                 </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" placeholder="Enter your email" required>
-                </div>
-                <div class="form-group">
-                    <label for="phone-number">Phone Number</label>
-                    <input type="text" id="phone-numer" placeholder="Enter your phone number" required>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone-number">Phone Number</label>
+                        <input type="text" id="phone" placeholder="Enter your phone number" required>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="location">Location</label>
@@ -152,7 +156,7 @@
                     <textarea id="reason"  rows="4" placeholder="Share your story to help us better serve your community...">
                     </textarea>
                 </div>
-                <button type="submit" class="btn-primary btn-submit">Submit Application</button>
+                <button type="submit" class="btn-primary btn-submit" onclick="handleSubmit(event)">Submit Application</button>
                 <p class="note">We'll review your application and connect you with food shares in your area within 24 hours.</p>
             </div>
         </div>
@@ -193,7 +197,7 @@
                     </div>
                     <div class="form-group">
                         <label for="donormessage">Message</label>
-                        <textarea id="donormessage" rows="3" placeholder="share why you are supporting ShareABite"></textarea>
+                        <textarea id="donormessage" rows="3" placeholder="Share why you are supporting ShareABite"></textarea>
                     </div>
                     <button type="submit" class="btn-primary btn-submit">Proceed to Payment</button>
                     <p class="note">You will be redirected to our secure payment processor.</p>
@@ -204,10 +208,10 @@
     <div class="bottom-container">
         <h2>Ready to Make a Difference?</h2>
         <p>Join thousands of neighbors sharing food and building community</p>
-        <a href="#" class="btn-primary">Donate</a>
+        <a href="#" class="btn btn-secondary">Donate</a>
     </div>
-    <div class="footer">
+    <footer>
         <p> &copy; 2025 ShareABite. Share food, reduce waste, build community.</p>
-    </div>
+    </footer>
 </body>
 </html>
