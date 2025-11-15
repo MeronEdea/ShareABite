@@ -5,13 +5,13 @@ function toggleMenu(){
 
 function toggleAnonymous(){
     const isAnonymous = document.getElementById('anonymous').checked;
-    const donorInfo = document.getElementById('donorInfo');
+    const donorDetails = document.getElementById('donorDetails');
     if(isAnonymous){
-        donorInfo.style.display = 'none';
+        donorDetails.style.display = 'none';
         document.getElementById('donorName').removeAttribute('required');
         document.getElementById('donorEmail').removeAttribute('required');
     } else{
-        donorInfo.style.display = 'block';
+        donorDetails.style.display = 'block';
         document.getElementById('donorName').setAttribute('required', 'required');
         document.getElementById('donorEmail').setAttribute('required', 'required');
     }
@@ -26,5 +26,13 @@ function handleDonation(event){
 
     if (!donationAmount || donationAmount <= 0){
         alert('Please enter a valid donation amount!');
-    } 
+    }
+    if (!isAnonymous && (!donorName || !donorEmail)){
+        alert('Please fill in your name and email or choose to donate anonymously!');
+    }
+
+    const successMsg = document.getElementById('successMessage');
+    successMsg.innerHTML = `Thank you for your $${donationAmount} donation! You're helping build stronger communities.`;
+    successMsg.style.display = 'block';      
+    
 }

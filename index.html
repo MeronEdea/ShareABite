@@ -11,6 +11,9 @@
 </head>
 
 <body>
+    <div class="success-message" id="successMessage">
+        Application submitted successfully! We will be in touch within 24 hours!
+    </div>
     <nav class="nav">
         <div class="logo">ShareABite</div>
         <button class="mobile-menu-btn" onclick="toggleMenu()">
@@ -196,29 +199,44 @@
             <div class="donate-form-container">
                 <div class="form-group">
                     <label class="checkbox-label">
-                    <input type="checkbox" id="anonymous" onchange="toggleAnonymous()"> Make my donation anonymous
+                        <input type="checkbox" id="anonymous" onchange="toggleAnonymous()"> Make my donation anonymous
                     </label>
                 </div>
                 <div class="donate-form" id="donorInfo">
                     <h3>Make A Donation</h3>
-                    <div class="form-group">
-                        <label for="donorname">Full Name</label>
-                        <input type="text" id="donorName" placeholder="Enter your name">
+                    <div id="donorDetails">
+                        <div class="form-group">
+                            <label for="donorname">Full Name</label>
+                            <input type="text" id="donorName" placeholder="Enter your name">
+                        </div>
+                        <div class="form-group">
+                            <label for="donoremail">Email</label>
+                            <input type="email" id="donorEmail" placeholder="Enter your email">
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label for="donoremail">Email</label>
-                        <input type="email" id="donorEmail" placeholder="Enter your email">
-                    </div>
-                    <div class="form-group">
-                        <label for="donoramount">Amount</label>
-                        <input type="number" id="donationAmount" placeholder="Enter the amount">
+                        <label for="donationamount">Amount</label>
+                        <div class="currency-input-wrapper">
+                            <select class="currency-select" id="currency" onchange="updateCurrencySymbol()">
+                                <option value="USD">USD $</option>
+                                <option value="EUR">EUR €</option>
+                                <option value="GBP">GBP £</option>
+                                <option value="NGN">NGN ₦</option>
+                                <option value="GHS">GHS ₵</option>
+                                <option value="KES">KES KSh</option>
+                                <option value="CAD">CAD $</option>
+                                <option value="ETB">ETB Br</option>
+                            </select>
+                        </div>
+                        <input type="number" class="currency-input" id="donationAmount" placeholder="Enter the amount">
                     </div>
                     <div class="form-group">
                         <label for="donormessage">Message</label>
                         <textarea id="donormessage" rows="3"
                             placeholder="Share why you are supporting ShareABite"></textarea>
                     </div>
-                    <button type="submit" class="btn-primary btn-submit" onClick="handleDonation(event)">Proceed to Payment</button>
+                    <button type="submit" class="btn-primary btn-submit" onclick="handleDonation(event)">Proceed to
+                        Payment</button>
                     <p class="note">You will be redirected to our secure payment processor.</p>
                 </div>
             </div>
