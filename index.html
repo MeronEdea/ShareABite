@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ShareABite </title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
 </head>
+
 <body>
     <nav class="nav">
         <div class="logo">ShareABite</div>
@@ -50,22 +53,25 @@
                     <i class="fa-solid fa-camera"></i>
                 </div>
                 <h3>Post Your Food</h3>
-                <p>Snap a photo of your leftovers, add a description, and set a pickup time. It takes less than a minute!</p>
+                <p>Snap a photo of your leftovers, add a description, and set a pickup time. It takes less than a
+                    minute!</p>
             </div>
-            
+
             <div class="step">
                 <div class="step-icon">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </div>
                 <h3>Find Nearby Shares</h3>
-                <p>Browse delicious meals shared by neighbors in your area. Filter by dietary preferences and distance.</p>
+                <p>Browse delicious meals shared by neighbors in your area. Filter by dietary preferences and distance.
+                </p>
             </div>
             <div class="step">
                 <div class="step-icon">
                     <i class="fa-solid fa-handshake"></i>
                 </div>
                 <h3>Connect & Pickup</h3>
-                <p>Message the sharer to coordinate pickup. Meet, collect your meal, and enjoy good food with zero waste!</p>
+                <p>Message the sharer to coordinate pickup. Meet, collect your meal, and enjoy good food with zero
+                    waste!</p>
             </div>
         </div>
     </div>
@@ -153,11 +159,14 @@
                 </div>
                 <div class="form-group">
                     <label for="reason">Why are you requesting food? (Optional)</label>
-                    <textarea id="reason"  rows="4" placeholder="Share your story to help us better serve your community...">
+                    <textarea id="reason" rows="4"
+                        placeholder="Share your story to help us better serve your community...">
                     </textarea>
                 </div>
-                <button type="submit" class="btn-primary btn-submit" onclick="handleSubmit(event)">Submit Application</button>
-                <p class="note">We'll review your application and connect you with food shares in your area within 24 hours.</p>
+                <button type="submit" class="btn-primary btn-submit" onclick="handleSubmit(event)">Submit
+                    Application</button>
+                <p class="note">We'll review your application and connect you with food shares in your area within 24
+                    hours.</p>
             </div>
         </div>
     </div>
@@ -166,40 +175,50 @@
         <p class="subtitle">Your donation helps us connect more people and reduce food waste in communities.</p>
         <div class="donate-container">
             <div class="donate-info">
-                 <h3>Why Donate?</h3>
-                 <div class="impact-stats">
+                <h3>Why Donate?</h3>
+                <div class="impact-stats">
                     <span class="impact-number">$10</span>
                     <p>helps connect 50 people with meals</p>
-                 </div>
-                 <div class="impact-stats">
+                </div>
+                <div class="impact-stats">
                     <span class="impact-number">$25</span>
                     <p>funds platform maintenance for a week</p>
-                 </div>
-                 <div class="impact-stats">
+                </div>
+                <div class="impact-stats">
                     <span class="impact-number">$50</span>
                     <p>supports community outreach programs</p>
-                 </div>
-                 <div class="impact-stats">
+                </div>
+                <div class="impact-stats">
                     <span class="impact-number">$100</span>
                     <p>covers operating costs for a month</p>
-                 </div>
+                </div>
             </div>
             <div class="donate-form-container">
-                <div class="donate-form">
+                <div class="form-group">
+                    <label class="checkbox-label">
+                    <input type="checkbox" id="anonymous" onchange="toggleAnonymous()"> Make my donation anonymous
+                    </label>
+                </div>
+                <div class="donate-form" id="donorInfo">
                     <h3>Make A Donation</h3>
                     <div class="form-group">
                         <label for="donorname">Full Name</label>
-                        <input type="text" id="donorname" placeholder="Enter your name">
+                        <input type="text" id="donorName" placeholder="Enter your name">
                     </div>
                     <div class="form-group">
                         <label for="donoremail">Email</label>
-                        <input type="email" id="donoremail" placeholder="Enter your email">
+                        <input type="email" id="donorEmail" placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="donoramount">Amount</label>
+                        <input type="number" id="donationAmount" placeholder="Enter the amount">
                     </div>
                     <div class="form-group">
                         <label for="donormessage">Message</label>
-                        <textarea id="donormessage" rows="3" placeholder="Share why you are supporting ShareABite"></textarea>
+                        <textarea id="donormessage" rows="3"
+                            placeholder="Share why you are supporting ShareABite"></textarea>
                     </div>
-                    <button type="submit" class="btn-primary btn-submit">Proceed to Payment</button>
+                    <button type="submit" class="btn-primary btn-submit" onClick="handleDonation(event)">Proceed to Payment</button>
                     <p class="note">You will be redirected to our secure payment processor.</p>
                 </div>
             </div>
@@ -214,4 +233,5 @@
         <p> &copy; 2025 ShareABite. Share food, reduce waste, build community.</p>
     </footer>
 </body>
+
 </html>

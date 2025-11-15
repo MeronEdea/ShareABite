@@ -299,7 +299,7 @@ body {
 .form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 16px;
+    gap: 10px;
 }
 label {
     display: block;
@@ -455,4 +455,79 @@ footer {
     color: #94a3b8;
     padding: 48px 5%;
     text-align: center;
+}
+
+/*Responsiveness*/
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: #1e40af;
+}
+
+@media (max-width: 768px){
+    .nav{
+        padding: 16px 5%;
+    }
+    .logo{
+        font-size: 22px;
+    }
+    .mobile-menu-btn{
+        display: block;
+    }
+    .nav-links{
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background: #ffffff;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding: 32px;
+        gap: 24px;
+    }
+    .nav-links.active{
+        left: 0;
+    }
+    .main{
+        padding: 80px 5%;
+        height: 500px;
+    }
+    .main h1{
+        font-size: 40px;
+        white-space: normal;
+    }
+    .main p{
+        font-size: 18px;
+    }
+    .form-row{
+        grid-template-columns: 1fr;
+    }
+    .form-container{
+        padding: 32px 24px;
+    }
+    .donate-container{
+        grid-template-columns: 1fr;
+    }
+    .title{
+        font-size: 32px;
+    }
+    .steps{
+        gap: 32px;
+    }
+    .features-grid{
+        gap: 24px;
+    }
+}
+
+@media (max-width: 480px){
+    .main h1{
+        font-size: 32px;
+    }
+    .title{
+        font-size: 28px;
+    }
 }
