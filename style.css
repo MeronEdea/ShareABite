@@ -219,7 +219,7 @@ body {
 
 /* Main Section */
 .main {
-    background-image: url(./Images/Community1.jpg);
+    background-image: url(./Images/Community4.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -464,6 +464,7 @@ input[type="text"],
 input[type="email"],
 input[type="tel"],
 input[type="number"],
+input[type="date"],
 select,
 textarea {
     width: 100%;

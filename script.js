@@ -369,3 +369,32 @@ if (document.readyState === 'loading') {
 } else {
     animateOnScroll();
 }
+
+function handleFoodDonation(event){
+    console.log('handleFoodDonation triggered');
+    const anonymous = document.getElementById('anonymous').checked;
+    const donorFullName = document.getElementById('donorFullName').value;
+    const donorEmail = document.getElementById('donorEmail').value;
+    const donorPhone = document.getElementById('donorPhone').value;
+    if(!anonymous && donorFullName === "" && donorEmail === "" && donorPhone === ""){
+        alert('Please enter your name, email, and phone or donate anonymously!')
+    }
+    
+}
+
+function toggleFoodDonationAnonymous(){
+    const anonymous = document.getElementById('anonymous').checked;
+    const donorFullName = document.getElementById('fullName');
+    const donorEmail = document.getElementById('Email');
+    const donorPhone = document.getElementById('Phone');
+
+    if(anonymous){
+        donorFullName.style.display = 'none';
+        donorEmail.style.display = 'none';
+        donorPhone.style.display = 'none';
+    } else{
+        donorFullName.style.display = 'block';
+        donorEmail.style.display = 'block';
+        donorPhone.style.display = 'block';
+    }
+}

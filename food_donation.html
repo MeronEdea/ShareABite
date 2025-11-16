@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Donation Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+     <script src="script.js"></script>
+</head>
+<body>
+    <nav class="nav">
+        <a href="index.html" class="logo">ShareABite</a>
+        <button class="mobile-menu-btn" onclick="toggleMenu()" aria-label="Toggle menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <div class="nav-links" id="navLinks">
+            <a href="#how">How It Works</a>
+            <div class="dropdown">
+                <a href="#features" class="dropdown-toggle">
+                    Features <i class="fa-solid fa-chevron-down"></i>
+                </a>
+                <div class="dropdown-menu">
+                    <a href="application.html" class="dropdown-item">Apply</a>
+                    <a href="#donate" class="dropdown-item">Donate</a>
+                </div>
+            </div>
+            <a href="about.html">About</a>
+            <a href="#donate" class="btn btn-primary">Donate</a>
+        </div>
+    </nav>
+
+    <section class="food-donation-main">
+        <div class="food-donation-main-content">
+            <h1 class="title">Donate Food to your community</h1>
+            <p class="subtitle">Share extra meals with your neighbors in need. Every meal makes a difference!</p>
+        </div>
+    </section>
+    <section class="food-donation-section">
+        <div class="form-container">
+            <div class="application-form">
+                <h2 class="title">Share Your Food</h2>
+                <p class="subtitle">Fill out the form below to share your food with someone near you.</p>
+                <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="anonymous" onchange="toggleFoodDonationAnonymous()">
+                            Make my donation anonymous
+                        </label>
+                    </div>
+                <h3 class="section-heading">Your Information</h3>
+                <div class="form-group" id="fullName">
+                    <label for="donorFullName">Full Name</label>
+                    <input type="text" id="donorFullName" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group" id="Email">
+                        <label for="donorEmail">Email Address</label>
+                        <input type="email" id="donorEmail" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group" id="Phone">
+                        <label for="phone-number">Phone Number</label>
+                        <input type="text" id="donorPhone" placeholder="Enter your phone number" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="donorLocation">Location</label>
+                    <input type="text" id="donorLocation" placeholder="Enter your location" required>
+                </div>
+                <h3 class="section-heading">Food Details</h3>
+                <div class="form-group">
+                    <label for="foodCategory"> Food Category</label>
+                    <select id="foodCategory" required>
+                        <option value="">Select Food Category</option>
+                        <option value="cooked">Cooked Foods</option>
+                        <option value="raw"> Raw/Fresh Foods</option>
+                        <option value="processed">Processed Foods</option>
+                        <option value="baked">Baked Foods</option>
+                    </select>
+                </div>
+                <div class="form-group" id="foodSubCategoryGroup">
+                    <label for="foodSubCategory">Specific Item</label>
+                    <select id="foodSubCategory" required>
+                        <option value="">Select Specific Item</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="foodDescription">Additional Description</label>
+                    <textarea id="foodDescription" rows="3" placeholder="Add any additional details e.g: organic">
+                    </textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="quantity">Quantity/Amount</label>
+                        <input type="text" id="quantity" placeholder="5 lbs, 2Kg, 10 pieces..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="servingSize">Serves Approximately</label>
+                        <select id="servingSize" required>
+                            <option value="">Select Serving Size</option>
+                            <option value="1-2"> 1-2 People</option>
+                            <option value="3-4"> 3-4 People</option>
+                            <option value="5-6"> 5-6 People</option>
+                            <option value="7-8"> 7-8 People</option>
+                            <option value="9-10"> 9-10 People</option>
+                            <option value="10+"> 10+ People</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group" id="preparedDateGroup">
+                        <label for="preparedDate">When was it prepared?</label>
+                        <input type="date" id="preparedDate" required>
+                    </div>
+                    <div class="form-group" id="expiryDateGroup">
+                        <label for="expiryDate">Expiry/ Best Before Date</label>
+                        <input type="date" id="expiryDate" required>
+                    </div>
+                    <div class="form-group" id="purchasedDateGroup">
+                        <label for="purchaseDate">Purchase Date</label>
+                        <input type="date" id="purchaseDate" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="dietaryInfo">Dietary Information</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="vegetarian">Vegetarian
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="gluten-free">Gluten Free
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="halal">Halal
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="organic">Organic
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="dairy-free">Dairy Free
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="nut-free">Nut Free
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="vegan">Vegan
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="allergens">Contains Allergens (if any)</label>
+                    <input type="text" id="allergens" placeholder="E.g. eggs, dairy, nuts">
+                </div>
+                <div class="form-group" id="ingredientsGroup">
+                    <label for="ingredients">Main Ingredients</label>
+                    <textarea id="ingredients" rows="2" placeholder="List main ingredients">
+                    </textarea>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="foodSubmitAgreement" required>
+                        <span>I confirm that this food has been prepared safely, and suitable for consumption!</span>
+                    </label>
+                </div>
+                <button type="submit" class="btn-primary btn-submit" onclick="handleFoodDonation(event)">Submit
+                    Donation</button>
+            </div>
+        </div>
+    </section>
+    
+</body>
+</html>
