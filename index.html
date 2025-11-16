@@ -11,11 +11,8 @@
 </head>
 
 <body>
-    <div class="success-message" id="successMessage">
-        Application submitted successfully! We will be in touch within 24 hours!
-    </div>
     <nav class="nav">
-        <div class="logo">ShareABite</div>
+        <a href="#" class="logo" onclick="scrollToTop(event)">ShareABite</a>
         <button class="mobile-menu-btn" onclick="toggleMenu()">
             <i class="fa-solid fa-bars"></i>
         </button>
@@ -23,14 +20,14 @@
             <a href="#how">How It Works</a>
             <a href="#features">Features</a>
             <a href="#about">About</a>
-            <a href="#" class=" btn btn-primary">Donate</a>
+            <a href="#donate" class=" btn btn-primary">Donate</a>
         </div>
     </nav>
     <div class="main">
         <div class="main-content">
             <h1>Share Good Food, Build Community</h1>
             <p>Connect with neighbors to share leftover meals. Too good to waste, too good not to share.</p>
-            <a href="#" class="btn btn-primary">Start Your Application</a>
+            <a href="application.html" class="btn btn-primary">Start Your Application</a>
         </div>
         <!-- <div class="stats">
             <div class="stats-box">
@@ -112,68 +109,7 @@
             </div>
         </div>
     </div>
-    <div class="application-section">
-        <h2 class="title">Request Food In Your Community</h2>
-        <p class="subtitle">Let your neighbors know you're looking for meals. We'll notify sharers in your area!</p>
-        <div class="form-container">
-            <div class="application-form">
-                <div class="form-group">
-                    <label for="fullname">Full Name</label>
-                    <input type="text" id="fullname" placeholder="Enter your full name" required>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" placeholder="Enter your email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone-number">Phone Number</label>
-                        <input type="text" id="phone" placeholder="Enter your phone number" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="location">Location</label>
-                    <input type="text" id="location" placeholder="Enter your location" required>
-                </div>
-                <div class="form-group">
-                    <label>Dietary Preferences</label>
-                    <div class="checkbox-group">
-                        <label class="checkbox-label">
-                            <input type="checkbox" value="vegetarian">Vegetarian
-                        </label>
-                        <label class="checkbox-label">
-                            <input type="checkbox" value="vegan">Vegan
-                        </label>
-                        <label class="checkbox-label">
-                            <input type="checkbox" value="gluten-free">Gluten-Free
-                        </label>
-                        <label class="checkbox-label">
-                            <input type="checkbox" value="halal">Halal
-                        </label>
-                        <label class="checkbox-label">
-                            <input type="checkbox" value="no-preferences">No Preferences
-                        </label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="allergies">Allergies or Food Restrictions</label>
-                    <textarea id="allergies" rows="3" placeholder="Please list any allergies or foods to avoid ...">
-                    </textarea>
-                </div>
-                <div class="form-group">
-                    <label for="reason">Why are you requesting food? (Optional)</label>
-                    <textarea id="reason" rows="4"
-                        placeholder="Share your story to help us better serve your community...">
-                    </textarea>
-                </div>
-                <button type="submit" class="btn-primary btn-submit" onclick="handleSubmit(event)">Submit
-                    Application</button>
-                <p class="note">We'll review your application and connect you with food shares in your area within 24
-                    hours.</p>
-            </div>
-        </div>
-    </div>
-    <div class="donate-section">
+    <div class="donate-section" id="donate">
         <h2 class="title"> Donate to ShareABite</h2>
         <p class="subtitle">Your donation helps us connect more people and reduce food waste in communities.</p>
         <div class="donate-container">
@@ -245,7 +181,7 @@
     <div class="bottom-container">
         <h2>Ready to Make a Difference?</h2>
         <p>Join thousands of neighbors sharing food and building community</p>
-        <a href="#" class="btn btn-secondary">Donate</a>
+        <a href="#donate" class="btn btn-secondary">Donate</a>
     </div>
     <footer>
         <p> &copy; 2025 ShareABite. Share food, reduce waste, build community.</p>

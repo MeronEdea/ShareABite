@@ -35,7 +35,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 24px 5%;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(164, 189, 228, 0.95);
     box-shadow: 0 2px 20px rgba(0,0,0,0.1);
     position: sticky;
     top: 0;
@@ -52,6 +52,12 @@ body {
     background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: gradient 3s ease infinite;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+.logo:hover {
+    transform: scale(1.05);
 }
 .nav-links {
     display: flex;
@@ -64,6 +70,9 @@ body {
     font-weight: 500;
     transition: color 0.3s;
     position: relative;
+}
+.nav-links .btn-primary {
+    color: #ffffff !important;
 }
 .nav-links a:not(.btn):hover {
     color: #1e40af;
@@ -280,6 +289,7 @@ body {
 }
 .application-section {
     margin-top: 64px;
+    scroll-margin-top: 80px;
 }
 .form-container,
 .application-form {
@@ -498,6 +508,12 @@ footer {
     font-size: 28px;
     cursor: pointer;
     color: #1e40af;
+}
+.mobile-menu-btn i {
+    transition: transform 0.3s ease;
+}
+.mobile-menu-btn i.fa-xmark {
+    transform: rotate(90deg);
 }
 
 @media (max-width: 768px){
