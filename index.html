@@ -4,57 +4,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShareABite </title>
+    <title>ShareABite - Share Food, Build Community</title>
+    <meta name="description" content="Connect with neighbors to share leftover meals. Too good to waste, too good not to share.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
 </head>
 
 <body>
+    <!-- Navigation -->
     <nav class="nav">
-        <a href="#" class="logo" onclick="scrollToTop(event)">ShareABite</a>
-        <button class="mobile-menu-btn" onclick="toggleMenu()">
+        <a href="index.html" class="logo">ShareABite</a>
+        <button class="mobile-menu-btn" onclick="toggleMenu()" aria-label="Toggle menu">
             <i class="fa-solid fa-bars"></i>
         </button>
         <div class="nav-links" id="navLinks">
             <a href="#how">How It Works</a>
-            <a href="#features">Features</a>
-            <a href="#about">About</a>
-            <a href="#donate" class=" btn btn-primary">Donate</a>
+            <div class="dropdown">
+                <a href="#features" class="dropdown-toggle">
+                    Features <i class="fa-solid fa-chevron-down"></i>
+                </a>
+                <div class="dropdown-menu">
+                    <a href="application.html" class="dropdown-item">Apply</a>
+                    <a href="#donate" class="dropdown-item">Donate</a>
+                </div>
+            </div>
+            <a href="about.html">About</a>
+            <a href="#donate" class="btn btn-primary">Donate</a>
         </div>
     </nav>
-    <div class="main">
+
+    <!-- Main Section -->
+    <section class="main">
         <div class="main-content">
             <h1>Share Good Food, Build Community</h1>
             <p>Connect with neighbors to share leftover meals. Too good to waste, too good not to share.</p>
             <a href="application.html" class="btn btn-primary">Start Your Application</a>
         </div>
-        <!-- <div class="stats">
-            <div class="stats-box">
-                <span class="stats-num"> 12,847</span>
-                <span class="stats-text"> Meals Shared</span>
-            </div>
-            <div class="stats-box">
-                <span class="stats-num"> 3,429</span>
-                <span class="stats-text"> Active Members</span>
-            </div>
-            <div class="stats-box">
-                <span class="stats-num"> 8.2 tons</span>
-                <span class="stats-text"> Food Saved</span>
-            </div>
-        </div> -->
-    </div>
-    <div class="how-it-works">
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how">
         <h2 class="title">How It Works</h2>
         <p class="subtitle">Sharing food with your community is as easy as 1-2-3</p>
+        
         <div class="steps">
             <div class="step">
                 <div class="step-icon">
                     <i class="fa-solid fa-camera"></i>
                 </div>
                 <h3>Post Your Food</h3>
-                <p>Snap a photo of your leftovers, add a description, and set a pickup time. It takes less than a
-                    minute!</p>
+                <p>Snap a photo of your leftovers, add a description, and set a pickup time. It takes less than a minute!</p>
             </div>
 
             <div class="step">
@@ -62,22 +62,24 @@
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </div>
                 <h3>Find Nearby Shares</h3>
-                <p>Browse delicious meals shared by neighbors in your area. Filter by dietary preferences and distance.
-                </p>
+                <p>Browse delicious meals shared by neighbors in your area. Filter by dietary preferences and distance.</p>
             </div>
+
             <div class="step">
                 <div class="step-icon">
                     <i class="fa-solid fa-handshake"></i>
                 </div>
                 <h3>Connect & Pickup</h3>
-                <p>Message the sharer to coordinate pickup. Meet, collect your meal, and enjoy good food with zero
-                    waste!</p>
+                <p>Message the sharer to coordinate pickup. Meet, collect your meal, and enjoy good food with zero waste!</p>
             </div>
         </div>
-    </div>
-    <div class="features">
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
         <h2 class="features-title">Why ShareABite?</h2>
         <p class="features-subtitle">Making food sharing safe, easy, and rewarding</p>
+        
         <div class="features-grid">
             <div class="feature">
                 <div class="feature-icon">
@@ -86,6 +88,7 @@
                 <h3>Location-Based</h3>
                 <p>Find food shares within walking distance. See exactly how far away each meal is.</p>
             </div>
+
             <div class="feature">
                 <div class="feature-icon">
                     <i class="fa-regular fa-comment-dots"></i>
@@ -93,6 +96,7 @@
                 <h3>Built-in Chat</h3>
                 <p>Coordinate pickup details easily with our secure messaging system.</p>
             </div>
+
             <div class="feature">
                 <div class="feature-icon">
                     <i class="fa-solid fa-star"></i>
@@ -100,6 +104,7 @@
                 <h3>Community Ratings</h3>
                 <p>Build trust through reviews and ratings. Know you're sharing with reliable neighbors.</p>
             </div>
+
             <div class="feature">
                 <div class="feature-icon">
                     <i class="fa-brands fa-pagelines"></i>
@@ -108,52 +113,70 @@
                 <p>See how much food waste you've prevented and CO2 emissions you've saved.</p>
             </div>
         </div>
-    </div>
-    <div class="donate-section" id="donate">
-        <h2 class="title"> Donate to ShareABite</h2>
+    </section>
+
+    <!-- Donation Section -->
+    <section class="donate-section" id="donate">
+        <h2 class="title">Donate to ShareABite</h2>
         <p class="subtitle">Your donation helps us connect more people and reduce food waste in communities.</p>
+        
         <div class="donate-container">
+            <!-- Impact Information -->
             <div class="donate-info">
                 <h3>Why Donate?</h3>
+                
                 <div class="impact-stats">
                     <span class="impact-number">$10</span>
                     <p>helps connect 50 people with meals</p>
                 </div>
+
                 <div class="impact-stats">
                     <span class="impact-number">$25</span>
                     <p>funds platform maintenance for a week</p>
                 </div>
+
                 <div class="impact-stats">
                     <span class="impact-number">$50</span>
                     <p>supports community outreach programs</p>
                 </div>
+
                 <div class="impact-stats">
                     <span class="impact-number">$100</span>
                     <p>covers operating costs for a month</p>
                 </div>
             </div>
+
+            <!-- Donation Form -->
             <div class="donate-form-container">
-                <div class="form-group">
-                    <label class="checkbox-label">
-                        <input type="checkbox" id="anonymous" onchange="toggleAnonymous()"> Make my donation anonymous
-                    </label>
-                </div>
-                <div class="donate-form" id="donorInfo">
+                <form class="donate-form" id="donorInfo">
                     <h3>Make A Donation</h3>
+
+                    <!-- Anonymous Checkbox -->
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="anonymous" onchange="toggleAnonymous()">
+                            Make my donation anonymous
+                        </label>
+                    </div>
+
+                    <!-- Donor Details -->
                     <div id="donorDetails">
                         <div class="form-group">
-                            <label for="donorname">Full Name</label>
+                            <label for="donorName">Full Name</label>
                             <input type="text" id="donorName" placeholder="Enter your name">
                         </div>
+
                         <div class="form-group">
-                            <label for="donoremail">Email</label>
+                            <label for="donorEmail">Email</label>
                             <input type="email" id="donorEmail" placeholder="Enter your email">
                         </div>
                     </div>
+
+                    <!-- Donation Amount with Currency -->
                     <div class="form-group">
-                        <label for="donationamount">Amount</label>
+                        <label for="donationAmount">Donation Amount</label>
                         <div class="currency-input-wrapper">
-                            <select class="currency-select" id="currency" onchange="updateCurrencySymbol()">
+                            <select class="currency-select" id="currency">
                                 <option value="USD">USD $</option>
                                 <option value="EUR">EUR €</option>
                                 <option value="GBP">GBP £</option>
@@ -163,29 +186,37 @@
                                 <option value="CAD">CAD $</option>
                                 <option value="ETB">ETB Br</option>
                             </select>
+                            <input type="number" class="currency-input" id="donationAmount" placeholder="Enter amount" min="1">
                         </div>
-                        <input type="number" class="currency-input" id="donationAmount" placeholder="Enter the amount">
                     </div>
+
+                    <!-- Optional Message -->
                     <div class="form-group">
-                        <label for="donormessage">Message</label>
-                        <textarea id="donormessage" rows="3"
-                            placeholder="Share why you are supporting ShareABite"></textarea>
+                        <label for="donormessage">Message (Optional)</label>
+                        <textarea id="donormessage" rows="3" placeholder="Share why you are supporting ShareABite"></textarea>
                     </div>
-                    <button type="submit" class="btn-primary btn-submit" onclick="handleDonation(event)">Proceed to
-                        Payment</button>
-                    <p class="note">You will be redirected to our secure payment processor.</p>
-                </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn-primary btn-submit" onclick="handleDonation(event)">
+                        Proceed to Payment
+                    </button>
+                    
+                    <p class="note">🔒 You will be redirected to our secure payment processor.</p>
+                </form>
             </div>
         </div>
-    </div>
-    <div class="bottom-container">
+    </section>
+
+    <!-- Bottom CTA Section -->
+    <section class="bottom-container">
         <h2>Ready to Make a Difference?</h2>
         <p>Join thousands of neighbors sharing food and building community</p>
-        <a href="#donate" class="btn btn-secondary">Donate</a>
-    </div>
+        <a href="#donate" class="btn btn-secondary">Donate Today</a>
+    </section>
+
+    <!-- Footer Section -->
     <footer>
-        <p> &copy; 2025 ShareABite. Share food, reduce waste, build community.</p>
+        <p>&copy; 2025 ShareABite. Share food, reduce waste, build community.</p>
     </footer>
 </body>
-
 </html>
