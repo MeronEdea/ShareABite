@@ -227,8 +227,6 @@ function handleDonation(event) {
     
     alert(thankYouMessage);
     
-    // In production, redirect to payment processor:
-    // window.location.href = `payment-processor-url?amount=${donationAmount}&currency=${currency}`;
     
     // Clear form
     document.getElementById('donationAmount').value = '';
@@ -242,10 +240,6 @@ function handleDonation(event) {
     // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-
-// ========================================
-// APPLICATION FORM FUNCTIONS
-// ========================================
 
 // Handle application form submission
 function handleSubmit(event) {
@@ -311,10 +305,6 @@ function handleSubmit(event) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// ========================================
-// UTILITY FUNCTIONS
-// ========================================
-
 // Show loading state for buttons
 function showLoading(buttonElement, loadingText = 'Processing...') {
     buttonElement.disabled = true;
@@ -351,11 +341,6 @@ function formatCurrency(amount, currency) {
     return `${symbol}${parseFloat(amount).toFixed(2)}`;
 }
 
-// ========================================
-// SCROLL ANIMATIONS (Optional Enhancement)
-// ========================================
-
-// Add fade-in animation on scroll
 function animateOnScroll() {
     const elements = document.querySelectorAll('.step, .feature, .impact-stats');
     
