@@ -94,22 +94,29 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Close dropdown when clicking dropdown items
-    const dropdownItems = document.querySelectorAll('.dropdown-item');
-    dropdownItems.forEach(item => {
-        item.addEventListener('click', () => {
-            const navLinks = document.getElementById('navLinks');
-
-            navLinks.classList.remove('active');
-            if (dropdown) {
-                dropdown.classList.remove('active');
-            }
-
-            if (menuBtn) {
-                menuBtn.classList.remove('fa-xmark');
-                menuBtn.classList.add('fa-bars');
-            }
-        });
+    // Toggle dropdown in mobile menu
+    document.querySelectorAll('.dropdown').forEach(dropdown => {
+        const toggle = dropdown.querySelector('.dropdown-toggle');
+        
+        if (toggle) {
+            toggle.addEventListener('click', function (e) {
+                // Only work on mobile (768px and below)
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    // Close other dropdowns
+                    document.querySelectorAll('.dropdown').forEach(d => {
+                        if (d !== dropdown) {
+                            d.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle current dropdown
+                    dropdown.classList.toggle('active');
+                }
+            });
+        }
     });
 
     // Close mobile menu when clicking outside
@@ -341,6 +348,38 @@ function formatCurrency(amount, currency) {
     return `${symbol}${parseFloat(amount).toFixed(2)}`;
 }
 
+// Handle desktop dropdown for Donate button
+document.addEventListener('DOMContentLoaded', function() {
+    // ... your existing code ...
+    
+    // Desktop dropdown handling for Donate button
+    const donateDropdown = document.querySelectorAll('.nav-links > .dropdown');
+    
+    donateDropdown.forEach(dropdown => {
+        const toggle = dropdown.querySelector('.dropdown-toggle');
+        const menu = dropdown.querySelector('.dropdown-menu');
+        
+        if (window.innerWidth > 768) {
+            // Desktop behavior - hover
+            dropdown.addEventListener('mouseenter', function() {
+                menu.style.display = 'flex';
+            });
+            
+            dropdown.addEventListener('mouseleave', function() {
+                menu.style.display = 'none';
+            });
+        } else {
+            // Mobile behavior - click
+            if (toggle) {
+                toggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    dropdown.classList.toggle('active');
+                });
+            }
+        }
+    });
+});
+
 function animateOnScroll() {
     const elements = document.querySelectorAll('.step, .feature, .impact-stats');
 
@@ -453,7 +492,7 @@ const subCategories = {
         'Cookies',
         'Buns',
         'Rolls',
-        'Crossiant'
+        'Croissant'
     ]
 };
 
@@ -473,4 +512,3 @@ document.getElementById('foodCategory').addEventListener("change", function(){
         });
     }
 });
-
