@@ -5,14 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ShareABite - Share Food, Build Community</title>
-    <meta name="description" content="Connect with neighbors to share leftover meals. Too good to waste, too good not to share.">
+    <meta name="description"
+        content="Connect with neighbors to share leftover meals. Too good to waste, too good not to share.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
-    <script src="impact.js"></script>
+
     <script src="https://js.paystack.co/v1/inline.js"></script>
     <script src="https://checkout.flutterwave.com/v3.js"></script>
     <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+    
+    <script src="firebase-config.js"></script>
+    <script src="script.js"></script>
+    <script src="impact.js"></script>
+    <script src="chat.js"></script>
 </head>
 
 <body>
@@ -68,14 +75,15 @@
     <section class="how-it-works" id="how">
         <h2 class="title">How It Works</h2>
         <p class="subtitle">Sharing food with your community is as easy as 1-2-3</p>
-        
+
         <div class="steps">
             <div class="step">
                 <div class="step-icon">
                     <i class="fa-solid fa-file-lines"></i>
                 </div>
                 <h3>Submit Application</h3>
-                <p>Fill out our simple application form with your details, location, and dietary needs. It takes less than 5 minutes!</p>
+                <p>Fill out our simple application form with your details, location, and dietary needs. It takes less
+                    than 5 minutes!</p>
             </div>
 
             <div class="step">
@@ -83,7 +91,8 @@
                     <i class="fa-solid fa-users"></i>
                 </div>
                 <h3>Get Matched</h3>
-                <p>We connect you with food sharers and donors in your community who can help meet your needs within 24 hours.</p>
+                <p>We connect you with food sharers and donors in your community who can help meet your needs within 24
+                    hours.</p>
             </div>
 
             <div class="step">
@@ -91,7 +100,8 @@
                     <i class="fa-solid fa-handshake"></i>
                 </div>
                 <h3>Receive Support</h3>
-                <p>Coordinate with your matched sharer and receive nutritious meals from caring neighbors in your community!</p>
+                <p>Coordinate with your matched sharer and receive nutritious meals from caring neighbors in your
+                    community!</p>
             </div>
         </div>
     </section>
@@ -100,7 +110,7 @@
     <section class="features" id="features">
         <h2 class="features-title">Why ShareABite?</h2>
         <p class="features-subtitle">Making food sharing safe, easy, and rewarding</p>
-        
+
         <div class="features-grid">
             <div class="feature">
                 <div class="feature-icon">
@@ -140,12 +150,12 @@
     <section class="donate-section" id="donate">
         <h2 class="title">Donate to ShareABite</h2>
         <p class="subtitle">Your donation helps us connect more people and reduce food waste in communities.</p>
-        
+
         <div class="donate-container">
             <!-- Impact Information -->
             <div class="donate-info">
                 <h3>Why Donate?</h3>
-                
+
                 <div class="impact-stats">
                     <span class="impact-number">$10</span>
                     <p>helps connect 50 people with meals</p>
@@ -207,21 +217,23 @@
                                 <option value="CAD">CAD $</option>
                                 <option value="ETB">ETB Br</option>
                             </select>
-                            <input type="number" class="currency-input" id="donationAmount" placeholder="Enter amount" min="1">
+                            <input type="number" class="currency-input" id="donationAmount" placeholder="Enter amount"
+                                min="1">
                         </div>
                     </div>
 
                     <!-- Optional Message -->
                     <div class="form-group">
                         <label for="donormessage">Message (Optional)</label>
-                        <textarea id="donormessage" rows="3" placeholder="Share why you are supporting ShareABite"></textarea>
+                        <textarea id="donormessage" rows="3"
+                            placeholder="Share why you are supporting ShareABite"></textarea>
                     </div>
 
                     <!-- Submit Button -->
                     <button type="submit" class="btn-primary btn-submit" onclick="handleDonation(event)">
                         Proceed to Payment
                     </button>
-                    
+
                     <p class="note">🔒 You will be redirected to our secure payment processor.</p>
                 </form>
             </div>
@@ -239,5 +251,28 @@
     <footer>
         <p>&copy; 2025 ShareABite. Share food, reduce waste, build community.</p>
     </footer>
+
+    <div class="chat-widget" id="chatWidget">
+        <div class="chat-header">
+            <h3>Chat with Community</h3>
+            <button class="chat-toggle" id="chatToggle">
+                <i class="fa-solid fa-chevron-down"></i>
+            </button>
+        </div>
+        <div class="chat-body" id="chatBody">
+            <div class="chat-messages" id="chatMessages">
+                <div class="message system-message">
+                    <p>Welcome to ShareABite chat! Connect with donors or receivers in your community.</p>
+                </div>
+            </div>
+            <div class="chat-input-container">
+                <input type="text" id="chatInput" placeholder="Type your message...">
+                <button id="sendMessage" class="btn-primary">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>
