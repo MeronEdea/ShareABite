@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Food Near You - ShareABite</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <script src="location.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <a href="index.html" class="logo">ShareABite</a>
+        <button class="mobile-menu-btn" onclick="toggleMenu()" aria-label="Toggle menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <div class="nav-links" id="navLinks">
+            <div class="dropdown">
+                <a href="index.html#how" class="dropdown-toggle">
+                    How It Works <i class="fa-solid fa-chevron-down"></i>
+                </a>
+                <div class="dropdown-menu">
+                    <a href="application.html" class="dropdown-item">Apply for Food</a>
+                    <a href="food_donation.html" class="dropdown-item">Donate Food</a>
+                    <a href="index.html#donate" class="dropdown-item">Donate Money</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="index.html#features" class="dropdown-toggle">
+                    Features <i class="fa-solid fa-chevron-down"></i>
+                </a>
+                <div class="dropdown-menu">
+                    <a href="location.html" class="dropdown-item">Browse Food</a>
+                    <a href="impact.html" class="dropdown-item">My Impact</a>
+                </div>
+            </div>
+            <a href="about.html">About</a>
+            <div class="dropdown">
+                <a href="#" class="dropdown-toggle btn btn-primary">
+                    Donate <i class="fa-solid fa-chevron-down"></i>
+                </a>
+                <div class="dropdown-menu">
+                    <a href="food_donation.html" class="dropdown-item">Donate Food</a>
+                    <a href="index.html#donate" class="dropdown-item">Donate Money</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Browse Section -->
+    <section class="browse-section">
+        <div class="browse-header">
+            <h1>Browse Food Near You</h1>
+            <p>Find fresh meals from generous neighbors in your community</p>
+        </div>
+
+        <!-- Location Prompt -->
+        <div class="location-prompt" id="locationPrompt">
+            <h3>📍 Enable Location Services</h3>
+            <p>We need your location to show you food donations nearby and calculate distances.</p>
+            <button class="location-btn" onclick="requestLocation()">
+                <i class="fa-solid fa-location-crosshairs"></i>
+                Share My Location
+            </button>
+        </div>
+
+        <!-- Filters -->
+        <div class="filters-container" id="filtersContainer" style="display: none;">
+            <div class="filters-grid">
+                <div class="filter-group">
+                    <label for="categoryFilter">Category</label>
+                    <select id="categoryFilter" onchange="applyFilters()">
+                        <option value="all">All Categories</option>
+                        <option value="cooked">Cooked Food</option>
+                        <option value="raw">Raw Ingredients</option>
+                        <option value="processed">Processed Food</option>
+                        <option value="baked">Baked Goods</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="distanceFilter">Distance</label>
+                    <select id="distanceFilter" onchange="applyFilters()">
+                        <option value="all">Any Distance</option>
+                        <option value="1">Within 1 km</option>
+                        <option value="3">Within 3 km</option>
+                        <option value="5">Within 5 km</option>
+                        <option value="10">Within 10 km</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="sortFilter">Sort By</label>
+                    <select id="sortFilter" onchange="applyFilters()">
+                        <option value="distance">Nearest First</option>
+                        <option value="recent">Most Recent</option>
+                        <option value="quantity">Most Quantity</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading State -->
+        <div class="loading" id="loadingState" style="display: none;">
+            <i class="fa-solid fa-spinner"></i>
+            <p>Finding food donations near you...</p>
+        </div>
+
+        <!-- Food Grid -->
+        <div class="food-grid" id="foodGrid">
+            <!-- Food cards will be populated by JavaScript -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 ShareABite. Share food, reduce waste, build community.</p>
+    </footer>
+</body>
+</html>

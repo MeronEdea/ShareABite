@@ -34,6 +34,11 @@ body {
     100% { background-position: 0% 50%; }
 }
 
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
 /* Navigation */
 .nav {
     display: flex;
@@ -480,6 +485,295 @@ body {
     box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
     z-index: 10;
 }
+
+/* Browse Food */
+.browse-section {
+    padding: 80px 5%;
+    background: #f8fafc;
+    min-height: 100vh;
+}
+
+.browse-header {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.browse-header h1 {
+    font-size: 42px;
+    color: #0f172a;
+    margin-bottom: 16px;
+}
+
+.browse-header p {
+    font-size: 18px;
+    color: #475569;
+    margin-bottom: 24px;
+}
+
+.location-prompt {
+    background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+    color: white;
+    padding: 32px;
+    border-radius: 16px;
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 48px;
+    box-shadow: 0 8px 30px rgba(59, 130, 246, 0.3);
+}
+
+.location-prompt h3 {
+    font-size: 24px;
+    margin-bottom: 16px;
+}
+
+.location-prompt p {
+    margin-bottom: 24px;
+    opacity: 0.9;
+}
+
+.location-btn {
+    background: white;
+    color: #1e40af;
+    padding: 14px 32px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.location-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+}
+
+.location-btn i {
+    margin-right: 8px;
+}
+
+.filters-container {
+    max-width: 1200px;
+    margin: 0 auto 32px;
+    background: white;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.filters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    align-items: end;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-group label {
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+.filter-group select {
+    padding: 10px 14px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 15px;
+    background: #f8fafc;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.filter-group select:focus {
+    outline: none;
+    border-color: #3b82f6;
+    background: white;
+}
+
+.food-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.food-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s;
+    border: 2px solid transparent;
+}
+
+.food-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 35px rgba(59, 130, 246, 0.3);
+    border-color: #3b82f6;
+}
+
+.food-image {
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 64px;
+    color: #3b82f6;
+}
+
+.food-content {
+    padding: 24px;
+}
+
+.food-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 16px;
+}
+
+.food-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 4px;
+}
+
+.food-category {
+    display: inline-block;
+    background: #dbeafe;
+    color: #1e40af;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-top: 4px;
+}
+
+.distance-badge {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.food-info {
+    margin-bottom: 16px;
+}
+
+.info-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    color: #475569;
+    font-size: 14px;
+}
+
+.info-row i {
+    width: 20px;
+    color: #3b82f6;
+    margin-right: 8px;
+}
+
+.food-description {
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.donor-info {
+    display: flex;
+    align-items: center;
+    padding-top: 16px;
+    border-top: 1px solid #e2e8f0;
+    margin-bottom: 16px;
+}
+
+.donor-avatar {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    margin-right: 12px;
+}
+
+.donor-name {
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.claim-btn {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.claim-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+    }
+
+.empty-state {
+    text-align: center;
+    padding: 80px 20px;
+    color: #64748b;
+}
+
+.empty-state i {
+    font-size: 80px;
+    margin-bottom: 24px;
+    color: #cbd5e1;
+}
+
+.empty-state h3 {
+    font-size: 24px;
+    color: #1e293b;
+    margin-bottom: 16px;
+}
+
+.empty-state p {
+    font-size: 16px;
+    margin-bottom: 24px;
+}
+
+.loading {
+    text-align: center;
+    padding: 60px;
+    font-size: 18px;
+    color: #64748b;
+}
+
+.loading i {
+    font-size: 48px;
+    color: #3b82f6;
+    margin-bottom: 16px;
+    animation: spin 1s linear infinite;
+}
+
 
 /* Impact Tracking Dashboard */
 .impact-dashboard {
@@ -1141,14 +1435,11 @@ footer {
 
 /* Responsive Design */
 
-/* Desktop view - Click-based dropdown (no hover) */
 @media (min-width: 769px) {
-    /* Hide chevron for regular links, keep for dropdown buttons */
     .nav-links > a:not(.dropdown-toggle) .fa-chevron-down {
         display: none;
     }
     
-    /* Remove hover-based dropdown - make it click-based */
     .nav-links > .dropdown .dropdown-menu {
         display: none;
         flex-direction: column;
@@ -1165,7 +1456,6 @@ footer {
         gap: 8px;
     }
 
-    /* Show dropdown when active class is added */
     .nav-links > .dropdown.active .dropdown-menu {
         display: flex !important;
     }
@@ -1225,6 +1515,14 @@ footer {
     .nav-links .dropdown .btn-primary {
         justify-content: space-between;
         text-align: left;
+    }
+
+    .food-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .filters-grid {
+        grid-template-columns: 1fr;
     }
 }
 
@@ -1354,6 +1652,13 @@ footer {
     
     .cta-buttons .btn {
         width: 100%;
+    }
+    .food-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .filters-grid {
+        grid-template-columns: 1fr;
     }
 }
 

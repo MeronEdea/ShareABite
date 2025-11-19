@@ -386,33 +386,18 @@ if (document.readyState === 'loading') {
     animateOnScroll();
 }
 
-function handleFoodDonation(event) {
-    console.log('handleFoodDonation triggered');
-    const anonymous = document.getElementById('anonymous').checked;
-    const donorFullName = document.getElementById('donorFullName').value;
-    const donorEmail = document.getElementById('donorEmail').value;
-    const donorPhone = document.getElementById('donorPhone').value;
-    if (!anonymous && donorFullName === "" && donorEmail === "" && donorPhone === "") {
-        alert('Please enter your name, email, and phone or donate anonymously!')
-    }
-
-    const preparedDate = new Date (document.getElementById('preparedDate').value);
-    const expiryDate = new Date (document.getElementById('expiryDate').value);
-    const purchaseDate = new Date (document.getElementById('purchaseDate').value);
-    const today = new Date();
-
-    if (typeof updateImpact === 'function') {
-    const foodType = document.getElementById('foodCategory').value;
-    const quantity = document.getElementById('quantity').value;
-    
-    // Calculate impact
-    // Average: 1 meal = 2.5kg CO2 saved
-    const mealsEstimate = Math.ceil(quantity / 2);
-    const co2Saved = mealsEstimate * 2.5;
-    
-    updateImpact('mealsShared', mealsEstimate, `🍽️ Donated ${quantity} servings of ${foodType} food`);
-    updateImpact('co2Saved', co2Saved, `🌍 Saved ${co2Saved.toFixed(1)}kg CO₂ from food waste`);
+// Save food donation to localStorage
+function saveFoodDonation(donationData) {
+    const donations = JSON.parse(localStorage.getItem('foodDonations') || '[]');
+    donationData.id = Date.now();
+    donations.push(donationData);
+    localStorage.setItem('foodDonations', JSON.stringify(donations));
+    console.log('Food donation saved:', donationData);
 }
+
+// Get all food donations from localStorage
+function getAllFoodDonations() {
+    return JSON.parse(localStorage.getItem('foodDonations') || '[]');
 }
 
 const today = new Date().toISOString().split("T")[0];

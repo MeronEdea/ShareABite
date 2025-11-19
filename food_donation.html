@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
     <script src="impact.js"></script>
+    <script src="location.js"></script>
 </head>
 <body>
     <nav class="nav">
@@ -16,19 +17,35 @@
             <i class="fa-solid fa-bars"></i>
         </button>
         <div class="nav-links" id="navLinks">
-            <a href="#how">How It Works</a>
+            <div class="dropdown">
+                <a href="#how" class="dropdown-toggle">
+                    How It Works <i class="fa-solid fa-chevron-down"></i>
+                </a>
+                <div class="dropdown-menu">
+                    <a href="application.html" class="dropdown-item">Apply for Food</a>
+                    <a href="food_donation.html" class="dropdown-item">Donate Food</a>
+                    <a href="index.html#donate" class="dropdown-item">Donate Money</a>
+                </div>
+            </div>
             <div class="dropdown">
                 <a href="#features" class="dropdown-toggle">
                     Features <i class="fa-solid fa-chevron-down"></i>
                 </a>
                 <div class="dropdown-menu">
-                    <a href="application.html" class="dropdown-item">Apply</a>
-                    <a href="#donate" class="dropdown-item">Donate</a>
+                    <a href="location.html" class="dropdown-item">Browse Food</a>
                     <a href="impact.html" class="dropdown-item">Impact Tracker</a>
                 </div>
             </div>
             <a href="about.html">About</a>
-            <a href="#donate" class="btn btn-primary">Donate</a>
+            <div class="dropdown">
+                <a href="#" class="dropdown-toggle btn btn-primary">
+                    Donate <i class="fa-solid fa-chevron-down"></i>
+                </a>
+                <div class="dropdown-menu">
+                    <a href="food_donation.html" class="dropdown-item">Donate Food</a>
+                    <a href="index.html#donate" class="dropdown-item">Donate Money</a>
+                </div>
+            </div>
         </div>
     </nav>
 
