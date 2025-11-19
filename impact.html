@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impact Tracking - ShareABite</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <script src="impact.js"></script>
+</head>
+<body>
+    <nav class="nav">
+        <a href="index.html" class="logo">ShareABite</a>
+        <button class="mobile-menu-btn" onclick="toggleMenu()" aria-label="Toggle menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <div class="nav-links" id="navLinks">
+            <div class="dropdown">
+                <a href="#how" class="dropdown-toggle">
+                    How It Works <i class="fa-solid fa-chevron-down"></i>
+                </a>
+                <div class="dropdown-menu">
+                    <a href="application.html" class="dropdown-item">Apply for Food</a>
+                    <a href="food_donation.html" class="dropdown-item">Donate Food</a>
+                    <a href="index.html#donate" class="dropdown-item">Donate Money</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="#features" class="dropdown-toggle">
+                    Features <i class="fa-solid fa-chevron-down"></i>
+                </a>
+                <div class="dropdown-menu">
+                    <a href="impact.html" class="dropdown-item">Impact Tracker</a>
+                </div>
+            </div>
+            <a href="about.html">About</a>
+            <div class="dropdown">
+                <a href="#" class="dropdown-toggle btn btn-primary">
+                    Donate <i class="fa-solid fa-chevron-down"></i>
+                </a>
+                <div class="dropdown-menu">
+                    <a href="food_donation.html" class="dropdown-item">Donate Food</a>
+                    <a href="index.html#donate" class="dropdown-item">Donate Money</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <section class="impact-dashboard">
+        <div class="dashboard-header">
+            <h1>Your Impact Dashboard</h1>
+            <p>See the difference you're making in your community</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-utensils"></i>
+                </div>
+                <div class="stat-number" id="mealsShared">0</div>
+                <div class="stat-label">Meals Shared</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+                <div class="stat-number" id="co2Saved">0</div>
+                <div class="stat-label">kg CO₂ Saved</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+                <div class="stat-number" id="peopleFed">0</div>
+                <div class="stat-label">People Fed</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <div class="stat-number" id="totalDonations">0</div>
+                <div class="stat-label">Total Donations</div>
+            </div>
+        </div>
+
+        <!-- Achievements Section -->
+        <div class="achievements-section">
+            <h2>Achievements</h2>
+            <div class="achievements-grid" id="achievementsGrid">
+                <!-- Achievements will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="recent-activity">
+            <h2>Recent Activity</h2>
+            <ul class="activity-list" id="activityList">
+                <!-- Activity will be populated by JavaScript -->
+            </ul>
+            <button class="reset-button" onclick="resetImpact()">Reset All Data</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 ShareABite. Share food, reduce waste, build community.</p>
+    </footer>
+
+    
+</body>
+</html>

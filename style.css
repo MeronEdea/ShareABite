@@ -481,6 +481,228 @@ body {
     z-index: 10;
 }
 
+/* Impact Tracking Dashboard */
+.impact-dashboard {
+    padding: 80px 5%;
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    min-height: 100vh;
+}
+
+.dashboard-header {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.dashboard-header h1 {
+    font-size: 42px;
+    color: #0f172a;
+    margin-bottom: 16px;
+}
+
+.dashboard-header p {
+    font-size: 18px;
+    color: #475569;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto 48px;
+}
+
+.stat-card {
+    background: #ffffff;
+    padding: 32px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s;
+    border: 2px solid transparent;
+    text-align: center;
+}
+
+.stat-card:hover {
+    transform: translateY(-10px);
+    border-color: #3b82f6;
+    box-shadow: 0 8px 30px rgba(59, 130, 246, 0.3);
+}
+
+.stat-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 32px;
+    color: #ffffff;
+}
+
+.stat-number {
+    font-size: 48px;
+    font-weight: 800;
+    color: #1e40af;
+    margin-bottom: 8px;
+}
+
+.stat-label {
+    font-size: 16px;
+    color: #475569;
+    font-weight: 600;
+}
+
+.achievements-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 48px;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.achievements-section h2 {
+    font-size: 32px;
+    color: #0f172a;
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+.achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+}
+
+.achievement-card {
+    background: #f8fafc;
+    padding: 24px;
+    border-radius: 12px;
+    text-align: center;
+    transition: all 0.3s;
+    border: 2px solid #e2e8f0;
+}
+
+.achievement-card.unlocked {
+    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+    border-color: #3b82f6;
+}
+
+.achievement-card.locked {
+    opacity: 0.5;
+}
+
+.achievement-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+
+.achievement-card.unlocked .achievement-icon {
+    color: #f59e0b;
+}
+
+.achievement-card.locked .achievement-icon {
+    color: #94a3b8;
+}
+
+.achievement-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 8px;
+}
+
+.achievement-desc {
+    font-size: 14px;
+    color: #475569;
+}
+
+.recent-activity {
+    max-width: 1200px;
+    margin: 48px auto 0;
+    background: #ffffff;
+    padding: 48px;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.recent-activity h2 {
+    font-size: 32px;
+    color: #0f172a;
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+.activity-list {
+    list-style: none;
+    padding: 0;
+}
+
+.activity-item {
+    padding: 20px;
+    background: #f8fafc;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    border-left: 4px solid #3b82f6;
+    transition: all 0.3s;
+}
+
+.activity-item:hover {
+    transform: translateX(10px);
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);
+}
+
+.activity-date {
+    font-size: 12px;
+    color: #64748b;
+    margin-bottom: 8px;
+}
+
+.activity-text {
+    font-size: 16px;
+    color: #1e293b;
+    font-weight: 500;
+}
+
+.reset-button {
+    display: block;
+    margin: 32px auto 0;
+    padding: 12px 32px;
+    background: #ef4444;
+    color: #ffffff;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.reset-button:hover {
+    background: #dc2626;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+}
+
+.empty-state {
+    text-align: center;
+    padding: 48px;
+    color: #64748b;
+}
+
+.empty-state i {
+    font-size: 64px;
+    margin-bottom: 24px;
+    color: #cbd5e1;
+}
+
+.empty-state p {
+    font-size: 18px;
+    margin-bottom: 24px;
+}
+
 /* Forms */
 .application-section {
     margin-top: 64px;
@@ -919,26 +1141,16 @@ footer {
 
 /* Responsive Design */
 
-/* Desktop view - hide dropdown functionality */
+/* Desktop view - Click-based dropdown (no hover) */
 @media (min-width: 769px) {
-    .dropdown-toggle i {
+    /* Hide chevron for regular links, keep for dropdown buttons */
+    .nav-links > a:not(.dropdown-toggle) .fa-chevron-down {
         display: none;
     }
     
-    .dropdown-menu {
-        display: none !important;
-    }
-
-    .dropdown .btn-primary i {
-        display: inline-block !important;
-    }
-
-    .nav-links > .dropdown {
-        position: relative;
-    }
-
-    .nav-links > .dropdown:hover .dropdown-menu {
-        display: flex !important;
+    /* Remove hover-based dropdown - make it click-based */
+    .nav-links > .dropdown .dropdown-menu {
+        display: none;
         flex-direction: column;
         position: absolute;
         top: 100%;
@@ -951,6 +1163,11 @@ footer {
         margin-top: 10px;
         z-index: 1000;
         gap: 8px;
+    }
+
+    /* Show dropdown when active class is added */
+    .nav-links > .dropdown.active .dropdown-menu {
+        display: flex !important;
     }
 
     .nav-links > .dropdown .dropdown-menu .dropdown-item {
@@ -966,6 +1183,48 @@ footer {
         background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
         color: #ffffff;
         transform: translateX(5px);
+    }
+
+    /* Keep chevron visible for dropdown buttons */
+    .dropdown-toggle .fa-chevron-down {
+        display: inline-block !important;
+    }
+}
+
+/* Mobile view */
+@media (max-width: 768px) {
+    .dropdown-toggle .fa-chevron-down {
+        display: inline-block !important;
+    }
+
+    .dropdown-menu {
+        display: none;
+        padding-left: 0;
+        margin-top: 8px;
+        width: 100%;
+    }
+
+    .dropdown.active .dropdown-menu {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .dropdown-item {
+        padding: 8px 16px;
+        background: #f8fafc;
+        border-radius: 8px;
+        transition: all 0.3s;
+    }
+
+    .dropdown-item:hover {
+        background: #e2e8f0;
+        transform: translateX(5px);
+    }
+
+    .nav-links .dropdown .btn-primary {
+        justify-content: space-between;
+        text-align: left;
     }
 }
 

@@ -25,29 +25,78 @@ function scrollToTop(event) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-
-    // Close mobile menu when clicking on a link
-    const navLinksItems = document.querySelectorAll('.nav-links a');
+    const navLinks = document.getElementById("navLinks");
     const menuBtn = document.querySelector('.mobile-menu-btn i');
-    const dropdown = document.querySelector('.dropdown');
+    const dropdowns = document.querySelectorAll('.dropdown');
 
-    navLinksItems.forEach(link => {
-        link.addEventListener('click', () => {
-            const navLinks = document.getElementById('navLinks');
+    // Handle all dropdowns (both desktop and mobile)
+    dropdowns.forEach(dropdown => {
+        const toggle = dropdown.querySelector('.dropdown-toggle');
+        
+        if (toggle) {
+            toggle.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // Close other dropdowns
+                dropdowns.forEach(d => {
+                    if (d !== dropdown) {
+                        d.classList.remove('active');
+                    }
+                });
+                
+                // Toggle current dropdown
+                dropdown.classList.toggle('active');
+            });
+        }
+    });
 
-            // Only close if it's not the dropdown toggle
-            if (!link.classList.contains('dropdown-toggle')) {
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function (e) {
+        // Check if click is outside all dropdowns
+        let clickedInsideDropdown = false;
+        dropdowns.forEach(dropdown => {
+            if (dropdown.contains(e.target)) {
+                clickedInsideDropdown = true;
+            }
+        });
+
+        if (!clickedInsideDropdown) {
+            dropdowns.forEach(dropdown => {
+                dropdown.classList.remove('active');
+            });
+        }
+    });
+
+    // Close mobile menu and dropdowns when clicking on dropdown items
+    const dropdownItems = document.querySelectorAll('.dropdown-item');
+    dropdownItems.forEach(item => {
+        item.addEventListener('click', () => {
+            // Close all dropdowns
+            dropdowns.forEach(dropdown => {
+                dropdown.classList.remove('active');
+            });
+
+            // Close mobile menu if open
+            if (navLinks && navLinks.classList.contains('active')) {
                 navLinks.classList.remove('active');
-
-                // Change icon back to hamburger
                 if (menuBtn) {
                     menuBtn.classList.remove('fa-xmark');
                     menuBtn.classList.add('fa-bars');
                 }
+            }
+        });
+    });
 
-                // Close dropdown if open
-                if (dropdown) {
-                    dropdown.classList.remove('active');
+    // Close mobile menu when clicking on regular nav links (not dropdown toggles)
+    const regularNavLinks = document.querySelectorAll('.nav-links > a:not(.dropdown-toggle)');
+    regularNavLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (navLinks && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                if (menuBtn) {
+                    menuBtn.classList.remove('fa-xmark');
+                    menuBtn.classList.add('fa-bars');
                 }
             }
         });
@@ -81,65 +130,18 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Toggle dropdown in mobile menu
-    const dropdownToggle = document.querySelector('.dropdown-toggle');
-
-    if (dropdownToggle && dropdown) {
-        dropdownToggle.addEventListener('click', function (e) {
-            // Only work on mobile (768px and below)
-            if (window.innerWidth <= 768) {
-                e.preventDefault();
-                dropdown.classList.toggle('active');
-            }
-        });
-    }
-
-    // Toggle dropdown in mobile menu
-    document.querySelectorAll('.dropdown').forEach(dropdown => {
-        const toggle = dropdown.querySelector('.dropdown-toggle');
-        
-        if (toggle) {
-            toggle.addEventListener('click', function (e) {
-                // Only work on mobile (768px and below)
-                if (window.innerWidth <= 768) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    
-                    // Close other dropdowns
-                    document.querySelectorAll('.dropdown').forEach(d => {
-                        if (d !== dropdown) {
-                            d.classList.remove('active');
-                        }
-                    });
-                    
-                    // Toggle current dropdown
-                    dropdown.classList.toggle('active');
-                }
-            });
+    // Add active state to current page nav link
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    const allNavLinks = document.querySelectorAll('.nav-links a:not(.dropdown-item)');
+    allNavLinks.forEach(link => {
+        const linkPage = link.getAttribute('href');
+        if (linkPage === currentPage ||
+            (currentPage === '' && linkPage === 'index.html') ||
+            (currentPage === 'index.html' && linkPage === 'index.html')) {
+            link.classList.add('active-page');
         }
     });
-
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', function (e) {
-        const navLinks = document.getElementById('navLinks');
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-
-        // Check if click is outside nav and menu is open
-        if (navLinks && navLinks.classList.contains('active')) {
-            if (!navLinks.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
-                navLinks.classList.remove('active');
-
-                if (menuBtn) {
-                    menuBtn.classList.remove('fa-xmark');
-                    menuBtn.classList.add('fa-bars');
-                }
-
-                if (dropdown) {
-                    dropdown.classList.remove('active');
-                }
-            }
-        }
-    });
+});
 
     // Add active state to current page nav link
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
@@ -151,7 +153,6 @@ document.addEventListener('DOMContentLoaded', function () {
             link.classList.add('active-page');
         }
     });
-});
 
 // Toggle anonymous donation
 function toggleAnonymous() {
@@ -227,13 +228,16 @@ function handleDonation(event) {
     // Log donation data (in production, send to server)
     console.log('Donation submitted:', donationData);
 
+    if (typeof updateImpact === 'function') {
+        updateImpact('totalDonations', 1, `💰 Donated ${currencySymbol}${donationAmount} ${currency}`);
+    }
+
     // Show success message
     const thankYouMessage = isAnonymous
         ? `✅ Thank you for your ${currencySymbol}${donationAmount} ${currency} donation!\n\nYour generous contribution is helping build stronger communities and reduce food waste.`
         : `✅ Thank you, ${donorName}, for your ${currencySymbol}${donationAmount} ${currency} donation!\n\nYour generous contribution is helping build stronger communities and reduce food waste.\n\nA confirmation receipt will be sent to ${donorEmail}.`;
 
     alert(thankYouMessage);
-
 
     // Clear form
     document.getElementById('donationAmount').value = '';
@@ -302,6 +306,10 @@ function handleSubmit(event) {
     // Log application data (in production, send to server)
     console.log('Application submitted:', applicationData);
 
+    if (typeof updateImpact === 'function') {
+        updateImpact('peopleFed', 1, `🤝 Submitted application to receive food`);
+    }
+
     // Show success message
     alert(`✅ Application submitted successfully!\n\nThank you, ${fullname}! We'll review your application and connect you with food sharers in your area within 24 hours.\n\nA confirmation email will be sent to ${email}.`);
 
@@ -311,6 +319,7 @@ function handleSubmit(event) {
     // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
 
 // Show loading state for buttons
 function showLoading(buttonElement, loadingText = 'Processing...') {
@@ -347,38 +356,6 @@ function formatCurrency(amount, currency) {
     const symbol = symbols[currency] || '$';
     return `${symbol}${parseFloat(amount).toFixed(2)}`;
 }
-
-// Handle desktop dropdown for Donate button
-document.addEventListener('DOMContentLoaded', function() {
-    // ... your existing code ...
-    
-    // Desktop dropdown handling for Donate button
-    const donateDropdown = document.querySelectorAll('.nav-links > .dropdown');
-    
-    donateDropdown.forEach(dropdown => {
-        const toggle = dropdown.querySelector('.dropdown-toggle');
-        const menu = dropdown.querySelector('.dropdown-menu');
-        
-        if (window.innerWidth > 768) {
-            // Desktop behavior - hover
-            dropdown.addEventListener('mouseenter', function() {
-                menu.style.display = 'flex';
-            });
-            
-            dropdown.addEventListener('mouseleave', function() {
-                menu.style.display = 'none';
-            });
-        } else {
-            // Mobile behavior - click
-            if (toggle) {
-                toggle.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    dropdown.classList.toggle('active');
-                });
-            }
-        }
-    });
-});
 
 function animateOnScroll() {
     const elements = document.querySelectorAll('.step, .feature, .impact-stats');
@@ -422,7 +399,20 @@ function handleFoodDonation(event) {
     const preparedDate = new Date (document.getElementById('preparedDate').value);
     const expiryDate = new Date (document.getElementById('expiryDate').value);
     const purchaseDate = new Date (document.getElementById('purchaseDate').value);
-    const today = new Date(); 
+    const today = new Date();
+
+    if (typeof updateImpact === 'function') {
+    const foodType = document.getElementById('foodCategory').value;
+    const quantity = document.getElementById('quantity').value;
+    
+    // Calculate impact
+    // Average: 1 meal = 2.5kg CO2 saved
+    const mealsEstimate = Math.ceil(quantity / 2);
+    const co2Saved = mealsEstimate * 2.5;
+    
+    updateImpact('mealsShared', mealsEstimate, `🍽️ Donated ${quantity} servings of ${foodType} food`);
+    updateImpact('co2Saved', co2Saved, `🌍 Saved ${co2Saved.toFixed(1)}kg CO₂ from food waste`);
+}
 }
 
 const today = new Date().toISOString().split("T")[0];
