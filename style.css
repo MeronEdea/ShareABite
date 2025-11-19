@@ -1587,6 +1587,56 @@ footer {
     cursor: pointer;
 }
 
+.food-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+/* .claim-btn {
+    flex: 2;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 12px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.claim-btn:hover {
+    background: #45a049;
+    transform: translateY(-2px);
+} */
+
+.contact-btn {
+    flex: 1;
+    background: #2196F3;
+    color: white;
+    border: none;
+    padding: 12px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.contact-btn:hover {
+    background: #1976D2;
+    transform: translateY(-2px);
+}
+
 /* Responsive Design */
 
 @media (min-width: 769px) {
@@ -1690,6 +1740,15 @@ footer {
         height: 60px !important;
         right: 10px;
         bottom: 10px;
+    }
+
+     .food-actions {
+        flex-direction: column;
+    }
+    
+    .claim-btn,
+    .contact-btn {
+        flex: none;
     }
 }
 

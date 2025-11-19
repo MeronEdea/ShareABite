@@ -274,7 +274,7 @@ function applyFilters() {
     displayFoodDonations(filtered);
 }
 
-// Display food donations
+// Display food donations with contact buttons
 function displayFoodDonations(donations) {
     const grid = document.getElementById('foodGrid');
     
@@ -328,9 +328,14 @@ function displayFoodDonations(donations) {
                     <div class="donor-name">${donation.donorName}</div>
                 </div>
                 
-                <button class="claim-btn" onclick="claimFood(${donation.id})">
-                    <i class="fa-solid fa-hand-holding-heart"></i> Request This Food
-                </button>
+                <div class="food-actions">
+                    <button class="claim-btn" onclick="claimFood(${donation.id})">
+                        <i class="fa-solid fa-hand-holding-heart"></i> Request Food
+                    </button>
+                    <button class="contact-btn" onclick="contactDonor(${donation.id})">
+                        <i class="fa-solid fa-message"></i> Chat with Donor
+                    </button>
+                </div>
             </div>
         </div>
     `).join('');
@@ -375,3 +380,63 @@ function claimFood(donationId) {
 window.requestLocation = requestLocation;
 window.applyFilters = applyFilters;
 window.claimFood = claimFood;
+
+// Contact donor directly via chat
+function contactDonor(donationId) {
+    const donation = foodDonations.find(d => d.id === donationId);
+    
+    if (!donation) return;
+    
+    console.log('Opening chat for donation:', donation);
+    
+    // Make sure chat widget is visible and initialized
+    const chatWidget = document.getElementById('chatWidget');
+    if (!chatWidget) {
+        console.error('Chat widget not found! Make sure it\'s included in location.html');
+        alert('Chat feature not available on this page.');
+        return;
+    }
+    
+    // Ensure chat is expanded and visible
+    chatWidget.style.display = 'block';
+    chatWidget.classList.remove('collapsed');
+    
+    // Update chat header with food context
+    const chatHeader = chatWidget.querySelector('.chat-header h3');
+    if (chatHeader) {
+        chatHeader.textContent = `Chat: ${donation.title}`;
+    }
+    
+    // Add context message about the food
+    const chatMessages = document.getElementById('chatMessages');
+    if (chatMessages) {
+        // Clear existing messages and add context
+        chatMessages.innerHTML = '';
+        
+        const systemMessage = document.createElement('div');
+        systemMessage.classList.add('message', 'system-message');
+        systemMessage.innerHTML = `
+            <p><strong>Chatting about ${donation.title}</strong></p>
+            <p>Donor: ${donation.donorName}</p>
+            <p>Distance: ${formatDistance(donation.distance)}</p>
+            <p>Quantity: ${donation.quantity} servings</p>
+            <small>Use this chat to coordinate pickup details!</small>
+        `;
+        chatMessages.appendChild(systemMessage);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+    
+    // Focus on chat input with helpful placeholder
+    const chatInput = document.getElementById('chatInput');
+    if (chatInput) {
+        chatInput.placeholder = `Message about ${donation.title}...`;
+        chatInput.focus();
+    }
+    
+    // Scroll to chat widget smoothly
+    setTimeout(() => {
+        chatWidget.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 100);
+    
+    console.log(`Chat opened for: ${donation.title} from ${donation.donorName}`);
+}

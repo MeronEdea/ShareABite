@@ -6,8 +6,14 @@
     <title>Browse Food Near You - ShareABite</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+
     <script src="script.js"></script>
+    <script src="firebase-config.js"></script>
     <script src="location.js"></script>
+    <script src="chat.js"></script>
 </head>
 <body>
     <!-- Navigation -->
@@ -113,6 +119,28 @@
             <!-- Food cards will be populated by JavaScript -->
         </div>
     </section>
+
+    <div class="chat-widget" id="chatWidget">
+        <div class="chat-header">
+            <h3>ShareABite Chat</h3>
+            <button class="chat-toggle" id="chatToggle">
+                <i class="fa-solid fa-chevron-down"></i>
+            </button>
+        </div>
+        <div class="chat-body" id="chatBody">
+            <div class="chat-messages" id="chatMessages">
+                <div class="message system-message">
+                    <p>Welcome to ShareABite chat! Connect with donors or receivers.</p>
+                </div>
+            </div>
+            <div class="chat-input-container">
+                <input type="text" id="chatInput" placeholder="Type your message...">
+                <button id="sendMessage" class="btn-primary">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer>
