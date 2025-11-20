@@ -120,19 +120,27 @@ function showAchievementNotification(achievement) {
 // Display impact data on the page
 function displayImpact() {
     const data = getImpactData();
-    
-    // Update stats
-    document.getElementById('mealsShared').textContent = data.mealsShared || 0;
-    document.getElementById('co2Saved').textContent = (data.co2Saved || 0).toFixed(1);
-    document.getElementById('peopleFed').textContent = data.peopleFed || 0;
-    document.getElementById('totalDonations').textContent = data.totalDonations || 0;
-    
-    // Display achievements
-    displayAchievements(data);
-    
-    // Display recent activity
-    displayActivity(data);
+
+    const mealsSharedEl = document.getElementById('mealsShared');
+    const co2SavedEl = document.getElementById('co2Saved');
+    const peopleFedEl = document.getElementById('peopleFed');
+    const totalDonationsEl = document.getElementById('totalDonations');
+
+    if (mealsSharedEl) mealsSharedEl.textContent = data.mealsShared || 0;
+    if (co2SavedEl) co2SavedEl.textContent = (data.co2Saved || 0).toFixed(1);
+    if (peopleFedEl) peopleFedEl.textContent = data.peopleFed || 0;
+    if (totalDonationsEl) totalDonationsEl.textContent = data.totalDonations || 0;
+
+    // These should also be guarded because the elements may not exist
+    if (document.getElementById('achievementsGrid')) {
+        displayAchievements(data);
+    }
+
+    if (document.getElementById('activityList')) {
+        displayActivity(data);
+    }
 }
+
 
 // Display achievements
 function displayAchievements(data) {

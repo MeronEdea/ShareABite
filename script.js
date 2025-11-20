@@ -406,6 +406,7 @@ const subCategories = {
 };
 
 document.getElementById('foodCategory')?.addEventListener("change", function(){
+    console.log('foodCategory triggered0');
     const category = this.value;
     const subCategory = document.getElementById("foodSubCategory");
 
