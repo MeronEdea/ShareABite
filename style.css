@@ -351,7 +351,7 @@ body {
     border-radius: 16px;
     transition: transform 0.3s;
     animation: fadeInUp 1s ease-out;
-    background: transparent;
+    background: #ffff;
 }
 
 .step:nth-child(1) { animation-delay: 0.2s; }
@@ -465,12 +465,12 @@ body {
 }
 
 /* Coming Soon Badge - for Built-in Chat feature */
-.feature:nth-child(2) {
+.feature:nth-child(3) {
     opacity: 0.75;
     position: relative;
 }
 
-.feature:nth-child(2)::after {
+.feature:nth-child(3)::after {
     content: 'Coming Soon';
     position: absolute;
     top: 20px;
@@ -1433,7 +1433,7 @@ footer {
     text-align: center;
 }
 
-/* Modal Styles - Add this to your style.css file */
+/* Modal Styles */
 .modal {
     display: none;
     position: fixed;
