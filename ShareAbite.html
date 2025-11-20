@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Food Issue Report</title>
+
+    <style>
+        /* --- BASIC PAGE STYLING --- */
+        body {
+            font-family: Arial, sans-serif;
+            background: #f6f6f6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        /* --- REPORT FORM CONTAINER --- */
+        .report-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        /* --- INPUT STYLES --- */
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 15px;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* --- BUTTON STYLE --- */
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background: #27ae60;
+            color: white;
+            font-size: 18px;
+            border-radius: 6px;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1e8f4e;
+        }
+
+        /* --- CONFIRMATION MESSAGE --- */
+        .success-message {
+            display: none; 
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Report a Food Safety Issue</h2>
+
+    <div class="report-container">
+
+        <!-- SUCCESS MESSAGE THAT SHOWS AFTER SUBMISSION -->
+        <div id="success" class="success-message">
+            Your report has been submitted successfully.  
+            Our team will review it as soon as possible.
+        </div>
+
+        <!-- --- REPORT FORM --- -->
+        <form id="reportForm">
+            
+            <!-- Name Field -->
+            <label for="name">Your Name (Optional)</label>
+            <input type="text" id="name" placeholder="Enter name">
+
+            <!-- Contact Field -->
+            <label for="contact">Contact Information</label>
+            <input type="text" id="contact" required 
+                   placeholder="Phone number or email">
+
+            <!-- Food Source -->
+            <label for="source">From whom did you receive the food?</label>
+            <input type="text" id="source" required placeholder="Name or pickup location">
+
+            <!-- Symptoms -->
+            <label for="symptoms">Describe what happened</label>
+            <textarea id="symptoms" required placeholder="Describe symptoms, time of illness, etc."></textarea>
+
+            <!-- Severity -->
+            <label for="severity">How severe is your illness?</label>
+            <select id="severity" required>
+                <option value="">Select severity</option>
+                <option value="Mild">Mild (nausea, headache)</option>
+                <option value="Moderate">Moderate (vomiting, stomach pain)</option>
+                <option value="Severe">Severe (hospital visit)</option>
+            </select>
+
+            <!-- Submit button -->
+            <button type="submit">Submit Report</button>
+        </form>
+    </div>
+
+    <script>
+        // --- GRAB THE FORM AND SUCCESS MESSAGE DIV ---
+        const reportForm = document.getElementById("reportForm");
+        const successMsg = document.getElementById("success");
+
+        // --- LISTEN FOR SUBMISSION EVENT ---
+        reportForm.addEventListener("submit", function(event) {
+            event.preventDefault(); // stop the page from refreshing
+
+            // --- GATHER FORM DATA ---
+            const reportData = {
+                name: document.getElementById("name").value,
+                contact: document.getElementById("contact").value,
+                source: document.getElementById("source").value,
+                symptoms: document.getElementById("symptoms").value,
+                severity: document.getElementById("severity").value,
+                dateReported: new Date().toLocaleString()
+            };
+
+            console.log("New Illness Report:", reportData);
+
+            /* 
+               --- WHAT THIS CONSOLE LOG MEANS ---
+               For now, the report is only logged to the browser.
+               Later, when you add a backend, you will send this data 
+               to your server/database using fetch() or an API.
+            */
+
+            // --- SHOW SUCCESS MESSAGE ---
+            successMsg.style.display = "block";
+
+            // --- CLEAR THE FORM ---
+            reportForm.reset();
+
+            // --- HIDE THE MESSAGE AFTER 5 SECONDS ---
+            setTimeout(() => {
+                successMsg.style.display = "none";
+            }, 5000);
+        });
+    </script>
+
+</body>
+</html>
