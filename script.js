@@ -216,9 +216,9 @@ function handleDonation(event) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Handle application form submission
 function handleSubmit(event) {
     event.preventDefault();
+    event.stopPropagation();
 
     const fullname = document.getElementById('fullname').value.trim();
     const email = document.getElementById('email').value.trim();
@@ -233,6 +233,7 @@ function handleSubmit(event) {
     const allergies = document.getElementById('allergies').value.trim();
     const reason = document.getElementById('reason').value.trim();
 
+    // Validation
     if (!fullname || !email || !phone || !location) {
         showErrorModal('Please fill in all required fields (Full Name, Email, Phone Number, and Location)');
         return;
@@ -263,17 +264,35 @@ function handleSubmit(event) {
 
     console.log('Application submitted:', applicationData);
 
+    // Update impact tracking
     if (typeof updateImpact === 'function') {
-        updateImpact('peopleFed', 1, `🤝 Submitted application to receive food`);
+        updateImpact('peopleFed', 1, `🤝 ${fullname} submitted application to receive food`);
     }
 
+    // Show success modal
     showSuccessModal(
         `Thank you, ${fullname}! We'll review your application and connect you with food sharers in your area within 24 hours.\n\nA confirmation email will be sent to ${email}.`,
         '✅ Application Submitted!'
     );
 
-    document.querySelector('.application-form').reset();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Clear form after a short delay to ensure modal is shown
+    setTimeout(() => {
+        // Reset form fields
+        document.getElementById('fullname').value = '';
+        document.getElementById('email').value = '';
+        document.getElementById('phone').value = '';
+        document.getElementById('location').value = '';
+        document.getElementById('allergies').value = '';
+        document.getElementById('reason').value = '';
+        
+        // Uncheck all dietary preference checkboxes
+        document.querySelectorAll('.checkbox-group input[type="checkbox"]').forEach(checkbox => {
+            checkbox.checked = false;
+        });
+
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 500);
 }
 
 function showLoading(buttonElement, loadingText = 'Processing...') {
