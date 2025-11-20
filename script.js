@@ -5,7 +5,6 @@ function toggleMenu() {
 
     navLinks.classList.toggle('active');
 
-    // Change icon between hamburger and X
     if (navLinks.classList.contains('active')) {
         menuBtn.classList.remove('fa-bars');
         menuBtn.classList.add('fa-xmark');
@@ -38,22 +37,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 e.preventDefault();
                 e.stopPropagation();
                 
-                // Close other dropdowns
                 dropdowns.forEach(d => {
                     if (d !== dropdown) {
                         d.classList.remove('active');
                     }
                 });
                 
-                // Toggle current dropdown
                 dropdown.classList.toggle('active');
             });
         }
     });
 
-    // Close dropdowns when clicking outside
     document.addEventListener('click', function (e) {
-        // Check if click is outside all dropdowns
         let clickedInsideDropdown = false;
         dropdowns.forEach(dropdown => {
             if (dropdown.contains(e.target)) {
@@ -68,16 +63,13 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Close mobile menu and dropdowns when clicking on dropdown items
     const dropdownItems = document.querySelectorAll('.dropdown-item');
     dropdownItems.forEach(item => {
         item.addEventListener('click', () => {
-            // Close all dropdowns
             dropdowns.forEach(dropdown => {
                 dropdown.classList.remove('active');
             });
 
-            // Close mobile menu if open
             if (navLinks && navLinks.classList.contains('active')) {
                 navLinks.classList.remove('active');
                 if (menuBtn) {
@@ -88,7 +80,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Close mobile menu when clicking on regular nav links (not dropdown toggles)
     const regularNavLinks = document.querySelectorAll('.nav-links > a:not(.dropdown-toggle)');
     regularNavLinks.forEach(link => {
         link.addEventListener('click', () => {
@@ -102,17 +93,14 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const href = this.getAttribute('href');
 
-            // Don't prevent default for dropdown toggle
             if (this.classList.contains('dropdown-toggle')) {
                 return;
             }
 
-            // Skip if href is just "#"
             if (href === '#') {
                 e.preventDefault();
                 return;
@@ -130,7 +118,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Add active state to current page nav link
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
     const allNavLinks = document.querySelectorAll('.nav-links a:not(.dropdown-item)');
     allNavLinks.forEach(link => {
@@ -142,17 +129,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
-
-    // Add active state to current page nav link
-    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-    navLinksItems.forEach(link => {
-        const linkPage = link.getAttribute('href');
-        if (linkPage === currentPage ||
-            (currentPage === '' && linkPage === 'index.html') ||
-            (currentPage === 'index.html' && linkPage === 'index.html')) {
-            link.classList.add('active-page');
-        }
-    });
 
 // Toggle anonymous donation
 function toggleAnonymous() {
@@ -181,40 +157,31 @@ function handleDonation(event) {
     const donorEmail = document.getElementById('donorEmail').value;
     const donorMessage = document.getElementById('donormessage').value;
 
-    // Get currency symbol
     const symbols = {
-        'USD': '$',
-        'EUR': '€',
-        'GBP': '£',
-        'NGN': '₦',
-        'GHS': '₵',
-        'KES': 'KSh',
-        'CAD': 'C$',
-        'ETB': 'Br'
+        'USD': '$', 'EUR': '€', 'GBP': '£', 'NGN': '₦',
+        'GHS': '₵', 'KES': 'KSh', 'CAD': 'C$', 'ETB': 'Br'
     };
     const currencySymbol = symbols[currency] || '$';
 
     // Validation
     if (!donationAmount || donationAmount <= 0) {
-        alert('Please enter a valid donation amount!');
+        showErrorModal('Please enter a valid donation amount!');
         return;
     }
 
     if (!isAnonymous && (!donorName || !donorEmail)) {
-        alert('Please fill in your name and email or choose to donate anonymously!');
+        showErrorModal('Please fill in your name and email or choose to donate anonymously!');
         return;
     }
 
-    // Email validation if not anonymous
     if (!isAnonymous) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(donorEmail)) {
-            alert('Please enter a valid email address');
+            showErrorModal('Please enter a valid email address');
             return;
         }
     }
 
-    // Create donation data object
     const donationData = {
         amount: donationAmount,
         currency: currency,
@@ -225,19 +192,17 @@ function handleDonation(event) {
         timestamp: new Date().toISOString()
     };
 
-    // Log donation data (in production, send to server)
     console.log('Donation submitted:', donationData);
 
     if (typeof updateImpact === 'function') {
         updateImpact('totalDonations', 1, `💰 Donated ${currencySymbol}${donationAmount} ${currency}`);
     }
 
-    // Show success message
     const thankYouMessage = isAnonymous
-        ? `✅ Thank you for your ${currencySymbol}${donationAmount} ${currency} donation!\n\nYour generous contribution is helping build stronger communities and reduce food waste.`
-        : `✅ Thank you, ${donorName}, for your ${currencySymbol}${donationAmount} ${currency} donation!\n\nYour generous contribution is helping build stronger communities and reduce food waste.\n\nA confirmation receipt will be sent to ${donorEmail}.`;
+        ? `Thank you for your ${currencySymbol}${donationAmount} ${currency} donation!\n\nYour generous contribution is helping build stronger communities and reduce food waste.`
+        : `Thank you, ${donorName}, for your ${currencySymbol}${donationAmount} ${currency} donation!\n\nYour generous contribution is helping build stronger communities and reduce food waste.\n\nA confirmation receipt will be sent to ${donorEmail}.`;
 
-    alert(thankYouMessage);
+    showSuccessModal(thankYouMessage, '✅ Donation Successful!');
 
     // Clear form
     document.getElementById('donationAmount').value = '';
@@ -248,7 +213,6 @@ function handleDonation(event) {
     document.getElementById('anonymous').checked = false;
     document.getElementById('donorDetails').style.display = 'block';
 
-    // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -256,13 +220,11 @@ function handleDonation(event) {
 function handleSubmit(event) {
     event.preventDefault();
 
-    // Get form values
     const fullname = document.getElementById('fullname').value.trim();
     const email = document.getElementById('email').value.trim();
     const phone = document.getElementById('phone').value.trim();
     const location = document.getElementById('location').value.trim();
 
-    // Get dietary preferences
     const dietaryPreferences = [];
     document.querySelectorAll('.checkbox-group input[type="checkbox"]:checked').forEach(checkbox => {
         dietaryPreferences.push(checkbox.value);
@@ -271,27 +233,23 @@ function handleSubmit(event) {
     const allergies = document.getElementById('allergies').value.trim();
     const reason = document.getElementById('reason').value.trim();
 
-    // Basic validation
     if (!fullname || !email || !phone || !location) {
-        alert('Please fill in all required fields (Full Name, Email, Phone Number, and Location)');
+        showErrorModal('Please fill in all required fields (Full Name, Email, Phone Number, and Location)');
         return;
     }
 
-    // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-        alert('Please enter a valid email address');
+        showErrorModal('Please enter a valid email address');
         return;
     }
 
-    // Phone validation (basic)
     const phoneRegex = /^[\d\s\-\+\(\)]+$/;
     if (!phoneRegex.test(phone)) {
-        alert('Please enter a valid phone number');
+        showErrorModal('Please enter a valid phone number');
         return;
     }
 
-    // Create application data object
     const applicationData = {
         fullname: fullname,
         email: email,
@@ -303,63 +261,48 @@ function handleSubmit(event) {
         timestamp: new Date().toISOString()
     };
 
-    // Log application data (in production, send to server)
     console.log('Application submitted:', applicationData);
 
     if (typeof updateImpact === 'function') {
         updateImpact('peopleFed', 1, `🤝 Submitted application to receive food`);
     }
 
-    // Show success message
-    alert(`✅ Application submitted successfully!\n\nThank you, ${fullname}! We'll review your application and connect you with food sharers in your area within 24 hours.\n\nA confirmation email will be sent to ${email}.`);
+    showSuccessModal(
+        `Thank you, ${fullname}! We'll review your application and connect you with food sharers in your area within 24 hours.\n\nA confirmation email will be sent to ${email}.`,
+        '✅ Application Submitted!'
+    );
 
-    // Clear form
     document.querySelector('.application-form').reset();
-
-    // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-
-// Show loading state for buttons
 function showLoading(buttonElement, loadingText = 'Processing...') {
     buttonElement.disabled = true;
     buttonElement.dataset.originalText = buttonElement.textContent;
     buttonElement.textContent = loadingText;
 }
 
-// Hide loading state for buttons
 function hideLoading(buttonElement) {
     buttonElement.disabled = false;
     buttonElement.textContent = buttonElement.dataset.originalText;
 }
 
-// Validate email format
 function isValidEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
 }
 
-// Format currency display
 function formatCurrency(amount, currency) {
     const symbols = {
-        'USD': '$',
-        'EUR': '€',
-        'GBP': '£',
-        'NGN': '₦',
-        'GHS': '₵',
-        'KES': 'KSh',
-        'CAD': 'C$',
-        'ETB': 'Br'
+        'USD': '$', 'EUR': '€', 'GBP': '£', 'NGN': '₦',
+        'GHS': '₵', 'KES': 'KSh', 'CAD': 'C$', 'ETB': 'Br'
     };
-
     const symbol = symbols[currency] || '$';
     return `${symbol}${parseFloat(amount).toFixed(2)}`;
 }
 
 function animateOnScroll() {
     const elements = document.querySelectorAll('.step, .feature, .impact-stats');
-
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -367,9 +310,7 @@ function animateOnScroll() {
                 entry.target.style.transform = 'translateY(0)';
             }
         });
-    }, {
-        threshold: 0.1
-    });
+    }, { threshold: 0.1 });
 
     elements.forEach(element => {
         element.style.opacity = '0';
@@ -379,14 +320,12 @@ function animateOnScroll() {
     });
 }
 
-// Call animation function when DOM is ready
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', animateOnScroll);
 } else {
     animateOnScroll();
 }
 
-// Save food donation to localStorage
 function saveFoodDonation(donationData) {
     const donations = JSON.parse(localStorage.getItem('foodDonations') || '[]');
     donationData.id = Date.now();
@@ -395,20 +334,19 @@ function saveFoodDonation(donationData) {
     console.log('Food donation saved:', donationData);
 }
 
-// Get all food donations from localStorage
 function getAllFoodDonations() {
     return JSON.parse(localStorage.getItem('foodDonations') || '[]');
 }
 
 const today = new Date().toISOString().split("T")[0];
-document.getElementById("preparedDate").setAttribute("max", today);
-document.getElementById("purchaseDate").setAttribute("max", today);
+document.getElementById("preparedDate")?.setAttribute("max", today);
+document.getElementById("purchaseDate")?.setAttribute("max", today);
 
 const expiryDate = document.getElementById("expiryDate");
 const preparedDate = document.getElementById("preparedDate");
 const purchaseDate = document.getElementById("purchaseDate");
 
-preparedDate.addEventListener("change", function(){
+preparedDate?.addEventListener("change", function(){
     if(this.value){
         expiryDate.setAttribute("min", this.value);
     } else{
@@ -416,7 +354,7 @@ preparedDate.addEventListener("change", function(){
     }
 });
 
-purchaseDate.addEventListener("change", function(){
+purchaseDate?.addEventListener("change", function(){
     if(this.value){
         expiryDate.setAttribute("min", this.value);
     } else{
@@ -442,37 +380,13 @@ function toggleFoodDonationAnonymous() {
 }
 
 const subCategories = {
-    cooked: [
-        'Soups',
-        'Fried Rice',
-        'Kokonte',
-        'Fufu',
-    ],
-    raw: [
-        'Fruits',
-        'Vegetables',
-        'Chicken',
-        'Fish',
-        'Beef',
-        'Beans'
-    ],
-    processed: [
-        'Canned Foods',
-        'Rice',
-        'Bottled Drinks',
-        'Snacks'
-    ],
-    baked: [
-        'Bread',
-        'Cookies',
-        'Buns',
-        'Rolls',
-        'Croissant'
-    ]
+    cooked: ['Soups', 'Fried Rice', 'Kokonte', 'Fufu'],
+    raw: ['Fruits', 'Vegetables', 'Chicken', 'Fish', 'Beef', 'Beans'],
+    processed: ['Canned Foods', 'Rice', 'Bottled Drinks', 'Snacks'],
+    baked: ['Bread', 'Cookies', 'Buns', 'Rolls', 'Croissant']
 };
 
-
-document.getElementById('foodCategory').addEventListener("change", function(){
+document.getElementById('foodCategory')?.addEventListener("change", function(){
     const category = this.value;
     const subCategory = document.getElementById("foodSubCategory");
 
@@ -487,3 +401,170 @@ document.getElementById('foodCategory').addEventListener("change", function(){
         });
     }
 });
+
+// Add this function to your script.js file
+
+function handleFoodDonation(event) {
+    event.preventDefault();
+
+    // Get form values
+    const anonymous = document.getElementById('anonymous').checked;
+    const donorFullName = document.getElementById('donorFullName')?.value.trim();
+    const donorEmail = document.getElementById('donorEmail')?.value.trim();
+    const donorPhone = document.getElementById('donorPhone')?.value.trim();
+    const donorLocation = document.getElementById('donorLocation').value.trim();
+    
+    const foodCategory = document.getElementById('foodCategory').value;
+    const foodSubCategory = document.getElementById('foodSubCategory').value;
+    const foodDescription = document.getElementById('foodDescription').value.trim();
+    const quantity = document.getElementById('quantity').value.trim();
+    const servingSize = document.getElementById('servingSize').value;
+    const preparedDate = document.getElementById('preparedDate')?.value;
+    const expiryDate = document.getElementById('expiryDate').value;
+    const purchaseDate = document.getElementById('purchaseDate')?.value;
+    const allergens = document.getElementById('allergens').value.trim();
+    const ingredients = document.getElementById('ingredients')?.value.trim();
+    const agreement = document.getElementById('foodSubmitAgreement').checked;
+
+    // Get dietary information
+    const dietaryInfo = [];
+    document.querySelectorAll('#dietaryInfo input[type="checkbox"]:checked').forEach(checkbox => {
+        dietaryInfo.push(checkbox.value);
+    });
+
+    // Validation
+    if (!anonymous && (!donorFullName || !donorEmail || !donorPhone)) {
+        showErrorModal('Please fill in your contact information or choose to donate anonymously.');
+        return;
+    }
+
+    if (!donorLocation) {
+        showErrorModal('Please enter your location.');
+        return;
+    }
+
+    if (!foodCategory || !foodSubCategory) {
+        showErrorModal('Please select a food category and specific item.');
+        return;
+    }
+
+    if (!quantity || !servingSize) {
+        showErrorModal('Please enter quantity and serving size.');
+        return;
+    }
+
+    if (!expiryDate) {
+        showErrorModal('Please enter the expiry/best before date.');
+        return;
+    }
+
+    if (!agreement) {
+        showErrorModal('Please confirm that the food is safe for consumption.');
+        return;
+    }
+
+    // Email validation if not anonymous
+    if (!anonymous && donorEmail) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(donorEmail)) {
+            showErrorModal('Please enter a valid email address.');
+            return;
+        }
+    }
+
+    // Create donation data object
+    const donationData = {
+        anonymous: anonymous,
+        donorName: anonymous ? 'Anonymous' : donorFullName,
+        donorEmail: anonymous ? 'N/A' : donorEmail,
+        donorPhone: anonymous ? 'N/A' : donorPhone,
+        location: donorLocation,
+        foodCategory: foodCategory,
+        foodSubCategory: foodSubCategory,
+        description: foodDescription || 'No additional description',
+        quantity: quantity,
+        servingSize: servingSize,
+        preparedDate: preparedDate || 'N/A',
+        expiryDate: expiryDate,
+        purchaseDate: purchaseDate || 'N/A',
+        dietaryInfo: dietaryInfo.length > 0 ? dietaryInfo.join(', ') : 'None specified',
+        allergens: allergens || 'None',
+        ingredients: ingredients || 'Not specified',
+        timestamp: new Date().toISOString(),
+        id: Date.now()
+    };
+
+    // Try to get user's location for better matching
+    if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(
+            function(position) {
+                donationData.latitude = position.coords.latitude;
+                donationData.longitude = position.coords.longitude;
+                saveDonation(donationData);
+            },
+            function(error) {
+                console.log('Location not available:', error);
+                saveDonation(donationData);
+            }
+        );
+    } else {
+        saveDonation(donationData);
+    }
+}
+
+function saveDonation(donationData) {
+    // Save to localStorage
+    const donations = JSON.parse(localStorage.getItem('foodDonations') || '[]');
+    donations.push(donationData);
+    localStorage.setItem('foodDonations', JSON.stringify(donations));
+    
+    console.log('Food donation saved:', donationData);
+
+    // Update impact tracking
+    if (typeof updateImpact === 'function') {
+        const servings = parseInt(donationData.servingSize.split('-')[1] || donationData.servingSize.replace('+', '')) || 1;
+        updateImpact('mealsShared', servings, `🍽️ Donated ${donationData.foodSubCategory}`);
+        updateImpact('co2Saved', servings * 2.5, `🌍 Saved ${(servings * 2.5).toFixed(1)}kg CO₂`);
+    }
+
+    // Show success message
+    const successMessage = donationData.anonymous 
+        ? `Thank you for donating ${donationData.foodSubCategory}!\n\nYour generous contribution will help feed people in your community.\n\nYou can view and manage your donation on the Browse Food page.`
+        : `Thank you, ${donationData.donorName}, for donating ${donationData.foodSubCategory}!\n\nYour generous contribution will help feed people in your community.\n\nYou can view and manage your donation on the Browse Food page.\n\nA confirmation will be sent to ${donationData.donorEmail}.`;
+
+    showSuccessModal(successMessage, '✅ Food Donation Submitted!');
+
+    // Clear form after short delay
+    setTimeout(() => {
+        // Reset all form fields
+        document.getElementById('anonymous').checked = false;
+        document.getElementById('donorFullName').value = '';
+        document.getElementById('donorEmail').value = '';
+        document.getElementById('donorPhone').value = '';
+        document.getElementById('donorLocation').value = '';
+        document.getElementById('foodCategory').value = '';
+        document.getElementById('foodSubCategory').innerHTML = '<option value="">Select Specific Item</option>';
+        document.getElementById('foodDescription').value = '';
+        document.getElementById('quantity').value = '';
+        document.getElementById('servingSize').value = '';
+        if (document.getElementById('preparedDate')) document.getElementById('preparedDate').value = '';
+        document.getElementById('expiryDate').value = '';
+        if (document.getElementById('purchaseDate')) document.getElementById('purchaseDate').value = '';
+        document.getElementById('allergens').value = '';
+        if (document.getElementById('ingredients')) document.getElementById('ingredients').value = '';
+        document.getElementById('foodSubmitAgreement').checked = false;
+        
+        // Uncheck all dietary checkboxes
+        document.querySelectorAll('#dietaryInfo input[type="checkbox"]').forEach(cb => {
+            cb.checked = false;
+        });
+
+        // Show donor fields again
+        document.getElementById('fullName').style.display = 'block';
+        document.getElementById('Email').style.display = 'block';
+        document.getElementById('Phone').style.display = 'block';
+
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 1000);
+}
