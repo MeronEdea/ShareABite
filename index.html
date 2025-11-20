@@ -5,8 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ShareABite - Share Food, Build Community</title>
-    <meta name="description"
-        content="Connect with neighbors to share leftover meals. Too good to waste, too good not to share.">
+    <meta name="description" content="Connect with neighbors to share leftover meals. Too good to waste, too good not to share.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 
@@ -17,9 +16,11 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
     
     <script src="firebase-config.js"></script>
+    <script src="modals.js"></script>
     <script src="script.js"></script>
     <script src="impact.js"></script>
     <script src="chat.js"></script>
+    <script src="location.js"></script>
 </head>
 
 <body>
@@ -252,7 +253,7 @@
         <p>&copy; 2025 ShareABite. Share food, reduce waste, build community.</p>
     </footer>
 
-    <div class="chat-widget" id="chatWidget">
+    <div class="chat-widget collapsed" id="chatWidget">
         <div class="chat-header">
             <h3>Chat with Community</h3>
             <button class="chat-toggle" id="chatToggle">
@@ -273,6 +274,60 @@
             </div>
         </div>
     </div>
-</body>
 
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('successModal')">&times;</span>
+            <div class="modal-icon success">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h3 class="modal-title" id="successModalTitle">Success!</h3>
+            <p class="modal-message" id="successModalMessage"></p>
+            <button class="btn btn-primary" onclick="closeModal('successModal')">OK</button>
+        </div>
+    </div>
+
+    <!-- Error Modal -->
+    <div id="errorModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('errorModal')">&times;</span>
+            <div class="modal-icon error">
+                <i class="fa-solid fa-circle-exclamation"></i>
+            </div>
+            <h3 class="modal-title" id="errorModalTitle">Error</h3>
+            <p class="modal-message" id="errorModalMessage"></p>
+            <button class="btn btn-primary" onclick="closeModal('errorModal')">OK</button>
+        </div>
+    </div>
+
+    <!-- Confirm Modal -->
+    <div id="confirmModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('confirmModal')">&times;</span>
+            <div class="modal-icon warning">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <h3 class="modal-title" id="confirmModalTitle">Confirm Action</h3>
+            <p class="modal-message" id="confirmModalMessage"></p>
+            <div class="modal-buttons">
+                <button class="btn btn-secondary" onclick="closeModal('confirmModal')">Cancel</button>
+                <button class="btn btn-primary" id="confirmModalBtn">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Info Modal -->
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('infoModal')">&times;</span>
+            <div class="modal-icon info">
+                <i class="fa-solid fa-circle-info"></i>
+            </div>
+            <h3 class="modal-title" id="infoModalTitle">Information</h3>
+            <p class="modal-message" id="infoModalMessage"></p>
+            <button class="btn btn-primary" onclick="closeModal('infoModal')">OK</button>
+        </div>
+    </div>
+</body>
 </html>
